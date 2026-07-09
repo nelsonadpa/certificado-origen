@@ -148,6 +148,16 @@
   .beat .pa2{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#e0555b,#a81b22);color:#fff;font-weight:900;font-size:11px;border:2px solid rgba(255,255,255,.5);transform:scale(var(--pump,1));transition:transform .09s}
   .beat .eq{display:flex;gap:3px;align-items:center;height:26px}
   .beat .eq span{width:4px;height:22px;border-radius:2px;background:var(--red);transform-origin:center;transform:scaleY(.18);transition:transform .09s}
+
+  /* outline icons + ken burns */
+  .formcard .fh .ic svg{width:19px;height:19px}
+  .fbtn svg{width:15px;height:15px;vertical-align:-2px;margin-right:7px}
+  .fld .val svg{width:15px;height:15px;flex:none;color:#6b7c96}
+  .pillar .em{color:#e6edf9;display:flex;justify-content:center}
+  .pillar .em svg{width:38px;height:38px;stroke-width:1.5}
+  .implbtn svg{width:18px;height:18px}
+  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.055)}}
+  .slide.on .shot{animation:rise .55s cubic-bezier(.2,.7,.2,1) both, kb 16s linear .4s forwards}
 </style>
 </head>
 <body>
@@ -199,7 +209,7 @@
   <section class="slide formstep" data-audio="assets/audio/en_s5.mp3">
     <div class="step anim">Step 2 · My company</div>
     <div class="formcard anim">
-      <div class="fh"><div class="ic">🏢</div><h3>Your export company details</h3></div>
+      <div class="fh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></div><h3>Your export company details</h3></div>
       <div class="fbody">
         <div class="miniempresa">
           <div class="logo">CE</div>
@@ -221,11 +231,11 @@
   <section class="slide formstep" data-audio="assets/audio/en_s6.mp3">
     <div class="step anim">Step 3 · Destination & importer</div>
     <div class="formcard anim">
-      <div class="fh"><div class="ic">🌎</div><h3>Destination country & buyer</h3></div>
+      <div class="fh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><h3>Destination country & buyer</h3></div>
       <div class="fbody">
         <div class="frow">
           <div class="fld"><label>Country you will ship to</label><div class="val sel">Mexico</div></div>
-          <div class="fld" style="flex:none;align-self:flex-end"><button class="fbtn">🔎 Find importer</button></div>
+          <div class="fld" style="flex:none;align-self:flex-end"><button class="fbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find importer</button></div>
         </div>
         <div class="hint anim">The system brings up the importers registered for that country. No need to type them by hand.</div>
         <div class="frow" style="margin-top:14px"><div class="fld"><label>Selected importer</label><div class="val">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.</div></div></div>
@@ -238,7 +248,7 @@
   <section class="slide formstep" data-audio="assets/audio/en_s7.mp3">
     <div class="step anim">Step 4 · Product</div>
     <div class="formcard anim">
-      <div class="fh"><div class="ic">📦</div><h3>Product to export</h3></div>
+      <div class="fh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg></div><h3>Product to export</h3></div>
       <div class="fbody">
         <div class="frow"><div class="fld"><label>Tariff subheading</label><div class="val sel">2208.40 — Rum and other cane spirits</div></div></div>
         <div class="frow"><div class="fld full"><label>Description</label><div class="val">Cuban aged rum, 40% vol., cases of 12 bottles</div></div></div>
@@ -252,9 +262,9 @@
   <section class="slide formstep" data-audio="assets/audio/en_s8.mp3">
     <div class="step anim">Step 5 · Trade agreement</div>
     <div class="formcard anim">
-      <div class="fh"><div class="ic">🤝</div><h3>Applicable trade agreement</h3></div>
+      <div class="fh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div><h3>Applicable trade agreement</h3></div>
       <div class="fbody">
-        <div class="btnrow"><button class="fbtn ghost">🔎 Find trade agreements</button></div>
+        <div class="btnrow"><button class="fbtn ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find trade agreements</button></div>
         <div class="frow">
           <div class="fld"><label>Agreement found</label><div class="val">ECA No. 51 · Cuba – Mexico (ALADI)</div></div>
           <div class="fld"><label>Certificate model</label><div class="val" style="justify-content:space-between">ALADI <span class="pill-type">Type&nbsp;<b>ALADI</b></span></div></div>
@@ -269,7 +279,7 @@
   <section class="slide formstep" data-audio="assets/audio/en_s9.mp3">
     <div class="step anim">Step 6 · Shipment & invoice</div>
     <div class="formcard anim">
-      <div class="fh"><div class="ic">🚢</div><h3>Shipment & commercial invoice</h3></div>
+      <div class="fh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg></div><h3>Shipment & commercial invoice</h3></div>
       <div class="fbody">
         <div class="frow">
           <div class="fld"><label>Vessel</label><div class="val">MV Habana</div></div>
@@ -284,7 +294,7 @@
         <div class="frow">
           <div class="fld"><label>FOB value</label><div class="val">84,600.00</div></div>
           <div class="fld"><label>Currency</label><div class="val sel">USD</div></div>
-          <div class="fld"><label>Attached invoice</label><div class="val">📎 invoice-FC-2026-0847.pdf</div></div>
+          <div class="fld"><label>Attached invoice</label><div class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg> invoice-FC-2026-0847.pdf</div></div>
         </div>
       </div>
     </div>
@@ -363,10 +373,10 @@
   <section class="slide benefits" data-audio="assets/audio/en_s13.mp3">
     <h2 class="anim">What do I gain from the certificate of origin?</h2>
     <div class="pillars">
-      <div class="pillar anim" style="animation-delay:.05s"><div class="em">💰</div><div class="vb">Save</div><div class="ds">Tariff preferences: lower duties, or none, in markets with an agreement.</div></div>
-      <div class="pillar anim" style="animation-delay:.15s"><div class="em">🛃</div><div class="vb">Prove origin</div><div class="ds">Proves Cuban origin before any foreign customs.</div></div>
-      <div class="pillar anim" style="animation-delay:.25s"><div class="em">⚡</div><div class="vb">Speed up</div><div class="ds">Online, in hours not days. No queues, no in-person paperwork.</div></div>
-      <div class="pillar anim" style="animation-delay:.35s"><div class="em">🔎</div><div class="vb">Trace</div><div class="ds">Every certificate is recorded and verifiable online.</div></div>
+      <div class="pillar anim" style="animation-delay:.05s"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></div><div class="vb">Save</div><div class="ds">Tariff preferences: lower duties, or none, in markets with an agreement.</div></div>
+      <div class="pillar anim" style="animation-delay:.15s"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="vb">Prove origin</div><div class="ds">Proves Cuban origin before any foreign customs.</div></div>
+      <div class="pillar anim" style="animation-delay:.25s"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="vb">Speed up</div><div class="ds">Online, in hours not days. No queues, no in-person paperwork.</div></div>
+      <div class="pillar anim" style="animation-delay:.35s"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><div class="vb">Trace</div><div class="ds">Every certificate is recorded and verifiable online.</div></div>
     </div>
   </section>
 
@@ -374,12 +384,13 @@
   <section class="slide concept" data-audio="assets/audio/en_s14.mp3" id="finale">
     <div class="kicker anim">Easy and online</div>
     <h2 class="anim" style="animation-delay:.1s">Cuba's Certificate of Origin</h2>
-    <p class="lead anim" style="animation-delay:.2s">Issued by the Chamber of Commerce of the Republic of Cuba, on the Single Window for Foreign Trade.</p>
+    <p class="lead anim" style="animation-delay:.2s">Issued by the Chamber of Commerce of the Republic of Cuba, on the Single Window for Foreign Trade of MINCEX.</p>
     <div class="chips anim" style="animation-delay:.3s">
+      <span class="chip">Vice Ministry of Foreign Trade · MINCEX</span>
       <span class="chip">Chamber of Commerce of the Republic of Cuba</span>
       <span class="chip">UN Trade and Development · UNCTAD</span>
     </div>
-    <a class="implbtn anim" style="animation-delay:.42s" href="como-implementar.html" target="_blank" rel="noopener">🚀 How to implement this?</a>
+    <a class="implbtn anim" style="animation-delay:.42s" href="como-implementar.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> How to implement this?</a>
     <div class="impl-note anim" style="animation-delay:.5s">Restricted access · technical cooperation plan</div>
   </section>
 
@@ -410,7 +421,7 @@ const NARR = [
   "I submit, and the Chamber issues my digital certificate of origin. It comes bilingual, in Spanish and English, with its unique number and a code to verify its authenticity online, paperless. This is what travels with my goods before the foreign customs.",
   "Every certificate feeds an official export database. The data is reported once and travels verified between institutions and borders, following international standards for trade data exchange. Less paperwork, more trust.",
   "In short, the certificate of origin gives me four things: access to tariff preferences, proof of origin before any customs, an online procedure in hours instead of days, and full traceability. For my company, that means competitiveness.",
-  "This is Cuba's certificate of origin: issued by the Chamber of Commerce, easy and online. An initiative of the Chamber of Commerce of the Republic of Cuba, with the support of the United Nations Trade and Development, UNCTAD."
+  "This is Cuba's certificate of origin: issued by the Chamber of Commerce, easy and online. An initiative of the Vice Ministry of Foreign Trade, with the Chamber of Commerce of the Republic of Cuba and the support of the United Nations Trade and Development, UNCTAD."
 ];
 
 const slides=[...document.querySelectorAll('.slide')];
