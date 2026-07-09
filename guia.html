@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Certificado de Origen — Guía · Cuba</title>
+<title>Certificado de Origen — Guía (con Claudia) · Cuba</title>
 <style>
   :root{
     --red:#d3222a; --red-dark:#a81b22; --navy:#16305c; --navy-deep:#0d1e38;
@@ -12,6 +12,7 @@
     --pref:#eaf1fb; --pref-borde:#c8d9f0; --pref-tx:#1e4d8b;
     --nopref:#fdf0e8; --nopref-borde:#f0d4c0; --nopref-tx:#8a4a1e;
     --ok:#e9f6ee; --ok-borde:#cbe2d1; --ok-tx:#1e6b3a;
+    --indigo:#16305c; --green-deep:#a81b22; --rule:#e3e9f2; --ink:#1c2430;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -108,6 +109,36 @@
   footer a{color:#e7eefb}
 
   @media (max-width:720px){ .versus{grid-template-columns:1fr} section{padding:42px 0} }
+
+  /* ===== Grace voice-guide (fixed, bottom-right) — generic ===== */
+  #grace-widget { position: fixed; right: 28px; bottom: 28px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  #grace-caption { max-width: 330px; background: #fff; border: 1px solid var(--rule, #e5e7eb); border-radius: 14px; padding: 13px 16px; font-size: 14px; line-height: 1.5; color: var(--ink, #111827); box-shadow: 0 10px 30px rgba(0,0,0,0.14); opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; pointer-events: none; }
+  #grace-caption.show { opacity: 1; transform: none; }
+  #grace-caption .gc-name { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-deep, #15803d); margin-bottom: 5px; }
+  #grace-dock { display: flex; align-items: center; gap: 12px; }
+  #grace-cta { background: var(--indigo, #2b2880); color: #fff; border: none; border-radius: 100px; padding: 11px 18px; font: 600 14px 'Poppins', sans-serif; cursor: pointer; box-shadow: 0 6px 20px rgba(43,40,128,0.35); display: flex; align-items: center; gap: 9px; }
+  #grace-cta:hover { filter: brightness(1.08); }
+  #grace-cta .gc-ic { font-size: 12px; }
+  #grace-bubble { position: relative; width: 96px; height: 96px; flex: none; cursor: pointer; }
+  #grace-aura, #grace-ring, #grace-portrait { position: absolute; left: 50%; top: 50%; border-radius: 50%; }
+  #grace-aura { width: 96px; height: 96px; transform: translate(-50%,-50%) scale(1); background: radial-gradient(circle, rgba(76,175,116,0.55) 0%, rgba(76,175,116,0) 70%); opacity: 0.2; }
+  #grace-ring { width: 88px; height: 88px; transform: translate(-50%,-50%) scale(1); border: 3px solid rgba(76,175,116,0.7); }
+  #grace-portrait { width: 74px; height: 74px; transform: translate(-50%,-50%); object-fit: cover; border: 3px solid #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.3); background: #4CAF74; }
+  #grace-nm { position: absolute; left: 50%; bottom: -19px; transform: translateX(-50%); font: 600 12px 'Poppins', sans-serif; color: #fff; background: rgba(43,40,128,0.9); padding: 2px 12px; border-radius: 100px; white-space: nowrap; }
+  .grace-hl { animation: graceHl 2.4s ease; border-radius: 12px; }
+  @keyframes graceHl { 0% { box-shadow: 0 0 0 0 rgba(76,175,116,0); } 22% { box-shadow: 0 0 0 5px rgba(76,175,116,0.4); } 100% { box-shadow: 0 0 0 0 rgba(76,175,116,0); } }
+  .grace-replay { margin-left: 12px; border: 1px solid #cbd5e1; background: #fff; color: var(--indigo, #2b2880); border-radius: 100px; font: 600 11px 'Poppins', sans-serif; padding: 3px 11px; cursor: pointer; vertical-align: middle; }
+  .grace-replay:hover { background: var(--indigo-wash, #eef0fb); }
+  /* dismiss (×) on the bubble corner → collapses the widget to a low-key re-open pill */
+  #grace-close { position: absolute; top: -7px; right: -7px; width: 24px; height: 24px; border-radius: 50%; border: none; background: #fff; color: var(--ink-soft, #475569); box-shadow: 0 2px 8px rgba(0,0,0,0.22); cursor: pointer; font: 700 15px/1 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center; z-index: 3; padding: 0; }
+  #grace-close:hover { background: #f1f5f9; color: var(--indigo, #2b2880); }
+  #grace-reopen { position: fixed; right: 28px; bottom: 28px; z-index: 9999; display: none; align-items: center; gap: 9px; background: #fff; border: 1px solid var(--rule, #e5e7eb); border-radius: 100px; padding: 6px 17px 6px 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.16); cursor: pointer; font: 600 13px 'Poppins', sans-serif; color: var(--indigo, #2b2880); }
+  #grace-reopen:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
+  #grace-reopen img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #4CAF74; }
+  #grace-reopen.show { display: flex; }
+  @media print { #grace-widget, #grace-reopen, .grace-replay { display: none !important; } }
+  @media (max-width: 600px) { #grace-caption { max-width: 210px; } #grace-cta .gc-tx { display: none; } #grace-cta { padding: 11px 14px; } }
+
 </style>
 </head>
 <body>
@@ -137,7 +168,7 @@
 <!-- 01 -->
 <section>
   <div class="wrap">
-    <div class="num"><span class="n">01</span><h2>La gran pregunta: ¿con o sin certificado?</h2></div>
+    <div class="num" id="s01"><span class="n">01</span><h2>La gran pregunta: ¿con o sin certificado?</h2></div>
     <p class="lead">Su mercancía puede cruzar la frontera de dos maneras. La diferencia es plata.</p>
     <div class="versus">
       <div class="vcard bad">
@@ -164,12 +195,12 @@
 <!-- 02 -->
 <section>
   <div class="wrap">
-    <div class="num"><span class="n">02</span><h2>Los tipos de certificado</h2></div>
+    <div class="num" id="s02"><span class="n">02</span><h2>Los tipos de certificado</h2></div>
     <p class="lead">No hay un certificado único: el modelo depende del acuerdo comercial entre Cuba y el país destino. Estas son las familias.</p>
 
     <div class="familia">Preferenciales — activan rebajas de arancel</div>
     <div class="tipos">
-      <div class="tcard pref">
+      <div class="tcard pref" id="g-aladi">
         <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>ALADI</div>
         <ul>
           <li><b>Para exportar a América Latina</b> (México, Colombia, y demás países de la Asociación Latinoamericana de Integración).</li>
@@ -178,7 +209,7 @@
         </ul>
         <div class="tf">Modelo oficial ALADI · el más usado por los exportadores cubanos en la región.</div>
       </div>
-      <div class="tcard pref">
+      <div class="tcard pref" id="g-sgp">
         <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>SGP</div>
         <ul>
           <li><b>Sistema General de Preferencias</b>: países que otorgan rebajas unilaterales a Cuba como país en desarrollo.</li>
@@ -191,7 +222,7 @@
 
     <div class="familia">No preferencial — acredita origen, sin rebaja</div>
     <div class="tipos">
-      <div class="tcard nopref">
+      <div class="tcard nopref" id="g-normal">
         <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Normal (no preferencial)</div>
         <ul>
           <li><b>Para destinos sin acuerdo preferencial</b> — por ejemplo Rusia y la Unión Económica Euroasiática, o cualquier país sin convenio.</li>
@@ -207,7 +238,7 @@
 <!-- 03 -->
 <section>
   <div class="wrap">
-    <div class="num"><span class="n">03</span><h2>Para orientarse: tres preguntas</h2></div>
+    <div class="num" id="s03"><span class="n">03</span><h2>Para orientarse: tres preguntas</h2></div>
     <p class="lead">En el trámite en línea no hace falta saberse los acuerdos: <b>el sistema los busca por usted</b> según el país y el producto. Pero si quiere anticiparlo:</p>
     <div class="matriz">
       <div class="q">
@@ -238,7 +269,7 @@
 <!-- 04 -->
 <section>
   <div class="wrap">
-    <div class="num"><span class="n">04</span><h2>El trámite, 100% en línea</h2></div>
+    <div class="num" id="s04"><span class="n">04</span><h2>El trámite, 100% en línea</h2></div>
     <p class="lead">Lo emite la Cámara de Comercio de la República de Cuba en la Ventanilla Única de Comercio Exterior. Siete pasos, sin papel:</p>
     <div class="pasos">
       <div class="paso"><h4>Identidad</h4><p>Ingrese con su cuenta única; el sistema verifica su empresa contra los registros oficiales.</p></div>
@@ -265,6 +296,101 @@
     <div><a href="en.html">English demo</a></div>
   </div>
 </footer>
+
+
+<div id="grace-widget">
+  <div id="grace-caption"><span class="gc-name">Claudia</span><span id="grace-cap-tx"></span></div>
+  <div id="grace-dock">
+    <button id="grace-cta" aria-label="Deje que Claudia le guíe"><span class="gc-ic" id="grace-ic">&#9654;</span><span class="gc-tx" id="grace-lb">Deje que Claudia le guíe</span></button>
+    <div id="grace-bubble" title="Claudia">
+      <div id="grace-aura"></div><div id="grace-ring"></div>
+      <img id="grace-portrait" src="data:image/webp;base64,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" alt="Claudia">
+      <div id="grace-nm">Claudia</div>
+      <button id="grace-close" type="button" aria-label="Dismiss Claudia" title="Dismiss Claudia">&times;</button>
+    </div>
+  </div>
+</div>
+<button id="grace-reopen" type="button" aria-label="Re-open Claudia"><img src="data:image/webp;base64,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" alt=""><span>Ask Claudia</span></button>
+<script>
+const GRACE_SEGMENTS = [{"audio": "assets/audio/guia/seg1.mp3", "target": null, "block": "start", "text": "Hola, soy Claudia, su gu\u00eda de la C\u00e1mara de Comercio de la Rep\u00fablica de Cuba. Esta p\u00e1gina le explica el certificado de origen: qu\u00e9 gana con \u00e9l, cu\u00e1l le toca y c\u00f3mo tramitarlo en l\u00ednea. Le acompa\u00f1o secci\u00f3n por secci\u00f3n."}, {"audio": "assets/audio/guia/seg2.mp3", "target": "#s01", "block": "start", "text": "Primero, la gran pregunta. Sin certificado, su mercanc\u00eda paga el arancel completo en el pa\u00eds destino. Con certificado, entra con las preferencias que le corresponden: menos arancel, o ninguno."}, {"audio": "assets/audio/guia/seg3.mp3", "target": ".bench", "block": "center", "text": "Un ejemplo real y verificado: el ron cubano embotellado entra a M\u00e9xico pagando solo la cuarta parte del arancel general, gracias al acuerdo ALADI No. 51."}, {"audio": "assets/audio/guia/seg4.mp3", "target": "#s02", "block": "start", "text": "No hay un certificado \u00fanico: el modelo depende del acuerdo comercial entre Cuba y el pa\u00eds destino. Hay dos familias: los preferenciales, que activan rebajas de arancel, y el no preferencial."}, {"audio": "assets/audio/guia/seg5.mp3", "target": "#g-aladi", "block": "center", "text": "El certificado ALADI es para exportar a Am\u00e9rica Latina. Usa la nomenclatura NALADISA y cita el acuerdo exacto, como el ACE No. 51 con M\u00e9xico. Es el m\u00e1s usado por los exportadores cubanos."}, {"audio": "assets/audio/guia/seg6.mp3", "target": "#g-sgp", "block": "center", "text": "El certificado SGP aplica cuando el pa\u00eds destino otorga preferencias unilaterales a Cuba. Ojo con la Uni\u00f3n Europea: desde 2020 usa el sistema REX, la autocertificaci\u00f3n del exportador registrado."}, {"audio": "assets/audio/guia/seg7.mp3", "target": "#g-normal", "block": "center", "text": "Y el certificado Normal, no preferencial, es para destinos sin acuerdo: acredita el origen cubano ante la aduana aunque no rebaje el arancel. Sale biling\u00fce, en espa\u00f1ol e ingl\u00e9s."}, {"audio": "assets/audio/guia/seg8.mp3", "target": "#s03", "block": "start", "text": "\u00bfNo sabe cu\u00e1l le toca? No se preocupe: en el tr\u00e1mite en l\u00ednea el sistema busca los acuerdos por usted, seg\u00fan el pa\u00eds y el producto. Estas tres preguntas le anticipan la respuesta."}, {"audio": "assets/audio/guia/seg9.mp3", "target": "#s04", "block": "start", "text": "El tr\u00e1mite es 100% en l\u00ednea, en siete pasos: su identidad, su empresa, el destino y el importador, el producto, el acuerdo, la operaci\u00f3n con su factura, y el certificado digital con su n\u00famero verificable."}, {"audio": "assets/audio/guia/seg10.mp3", "target": ".ctas", "block": "center", "text": "Cuando est\u00e9 listo, inicie su solicitud en la Ventanilla \u00danica. Y si quiere verlo en acci\u00f3n, mire el demo narrado de tres minutos. Aqu\u00ed estoy cuando me necesite."}];
+(function(){
+  const aura=document.getElementById('grace-aura'), ring=document.getElementById('grace-ring');
+  const cap=document.getElementById('grace-caption'), capTx=document.getElementById('grace-cap-tx');
+  const cta=document.getElementById('grace-cta'), ic=document.getElementById('grace-ic'), lb=document.getElementById('grace-lb');
+  const bubble=document.getElementById('grace-bubble');
+  const NAME="Claudia", CTA="Deje que Claudia le gu\u00ede";
+  const audios=GRACE_SEGMENTS.map(s=>{ const a=new Audio(); a.preload="none"; a.src=s.audio; return a; });
+  let ctx, analyser, freq, srcs={}, raf;
+  let current=-1, playing=false, tour=false;
+
+  function ensureCtx(){
+    if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)(); analyser=ctx.createAnalyser(); analyser.fftSize=256; freq=new Uint8Array(analyser.frequencyBinCount); analyser.connect(ctx.destination); }
+    if(ctx.state==='suspended') ctx.resume();
+  }
+  function connect(i){ if(!srcs[i]){ try{ const s=ctx.createMediaElementSource(audios[i]); s.connect(analyser); srcs[i]=s; }catch(e){} } }
+  function idle(){ aura.style.transform='translate(-50%,-50%) scale(1)'; aura.style.opacity='0.2'; ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='0.7'; }
+  function pulse(){
+    if(!playing){ idle(); return; }
+    analyser.getByteFrequencyData(freq);
+    let s=0; for(let i=0;i<freq.length;i++) s+=freq[i];
+    const a=Math.min(1,(s/freq.length)/85);
+    aura.style.transform='translate(-50%,-50%) scale('+(1+a*0.85)+')';
+    aura.style.opacity=(0.2+a*0.6).toFixed(3);
+    ring.style.transform='translate(-50%,-50%) scale('+(1+a*0.55)+')';
+    ring.style.opacity=(0.7-a*0.35).toFixed(3);
+    raf=requestAnimationFrame(pulse);
+  }
+  function setIcon(pl){ ic.innerHTML=pl?'&#10074;&#10074;':'&#9654;'; lb.textContent=pl?'Pause':(tour&&current>=0?'Resume':CTA); }
+  function highlight(el){ document.querySelectorAll('.grace-hl').forEach(e=>e.classList.remove('grace-hl')); if(el){ void el.offsetWidth; el.classList.add('grace-hl'); } }
+  function targetEl(seg){ return seg.target?document.querySelector(seg.target):null; }
+
+  function play(i, isTour){
+    ensureCtx(); tour=!!isTour;
+    if(current>=0){ audios[current].pause(); audios[current].onended=null; }
+    current=i; const seg=GRACE_SEGMENTS[i], a=audios[i]; connect(i);
+    const el=targetEl(seg);
+    if(el){ el.scrollIntoView({behavior:'smooth', block:seg.block||'start'});
+            highlight(el.classList.contains('screen-caption') ? (el.nextElementSibling||el) : el); }
+    else { window.scrollTo({top:0,behavior:'smooth'}); highlight(null); }
+    capTx.textContent=seg.text; cap.classList.add('show');
+    a.currentTime=0;
+    a.play().then(()=>{ playing=true; setIcon(true); pulse(); }).catch(()=>{});
+    a.onended=function(){ playing=false; setIcon(false);
+      if(tour && current<GRACE_SEGMENTS.length-1){ play(current+1,true); }
+      else { tour=false; cap.classList.remove('show'); highlight(null); idle(); }
+    };
+  }
+  function toggle(){
+    if(playing){ audios[current].pause(); playing=false; setIcon(false); idle(); }
+    else if(tour && current>=0){ ensureCtx(); audios[current].play(); playing=true; setIcon(true); pulse(); }
+    else { play(0,true); }
+  }
+  cta.addEventListener('click', toggle);
+  bubble.addEventListener('click', toggle);
+
+  // dismiss / re-open — Grace is on by default; the × collapses her to a low-key pill
+  const widget=document.getElementById('grace-widget'), closeBtn=document.getElementById('grace-close'), reopen=document.getElementById('grace-reopen');
+  closeBtn.addEventListener('click', function(ev){ ev.stopPropagation();
+    if(playing){ audios[current].pause(); playing=false; setIcon(false); idle(); }
+    cap.classList.remove('show'); highlight(null);
+    widget.style.display='none'; reopen.classList.add('show');
+  });
+  reopen.addEventListener('click', function(){ reopen.classList.remove('show'); widget.style.display='flex'; });
+
+  GRACE_SEGMENTS.forEach((seg,i)=>{
+    if(!seg.target) return;
+    const host=document.querySelector(seg.target);
+    if(!host) return;
+    const anchor = host.querySelector('.part-eyebrow') || host.querySelector('.factbox-head') || host;
+    const b=document.createElement('button');
+    b.className='grace-replay'; b.type='button'; b.innerHTML='&#128266; '+NAME;
+    b.title='Hear '+NAME+' explain this';
+    b.addEventListener('click', function(ev){ ev.preventDefault(); ev.stopPropagation(); play(i,false); });
+    anchor.appendChild(b);
+  });
+  idle();
+})();
+</script>
 
 </body>
 </html>
