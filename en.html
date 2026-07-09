@@ -30,13 +30,14 @@
   .slide.concept h2{font-size:clamp(26px,3.6vw,44px);font-weight:800;line-height:1.12;margin:6px 0 12px;max-width:20ch}
   .slide.concept p.lead{font-size:clamp(16px,2vw,23px);color:#dce6f6;max-width:58ch;line-height:1.5}
   .bignum{font-size:clamp(70px,13vw,180px);font-weight:900;color:#fff;line-height:1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
-  .bignum small{font-size:.28em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
-  .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;background:url('assets/img/portal-home.png') center/cover no-repeat}
-  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,18,38,.94) 0%,rgba(8,18,38,.86) 42%,rgba(8,18,38,.70) 100%)}
-  .slide.hero .box{position:relative;padding:0 7vw 12vh;max-width:940px}
-  .slide.hero .kicker{font-size:clamp(13px,1.5vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
-  .slide.hero h1{font-size:clamp(38px,6vw,82px);font-weight:900;line-height:1.04;margin:14px 0 12px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
-  .slide.hero p{font-size:clamp(15px,1.9vw,22px);color:#eaf0fa;max-width:54ch;line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+  .bignum small{font-size:.24em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
+  .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;background:#0c1c38 url('assets/img/hero-port.png') right center/cover no-repeat}
+  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,20,42,.86) 0%,rgba(9,20,42,.40) 46%,rgba(9,20,42,0) 72%),linear-gradient(0deg,rgba(6,14,30,.66) 0%,rgba(6,14,30,0) 34%)}
+  .slide.hero .box{position:relative;padding:0 7vw max(210px,18vh);max-width:900px}
+  .slide.hero .box::before{content:"";display:block;width:56px;height:4px;border-radius:3px;background:var(--red);margin-bottom:22px;box-shadow:0 0 22px rgba(211,34,42,.55)}
+  .slide.hero .kicker{font-size:clamp(12px,1.3vw,15px);letter-spacing:.22em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
+  .slide.hero h1{font-size:clamp(40px,5.4vw,72px);font-weight:900;line-height:1.05;margin:12px 0 14px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+  .slide.hero p{font-size:clamp(15px,1.7vw,21px);color:#eaf0fa;max-width:46ch;line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.55)}
   .slide.screen{flex-direction:column;align-items:center;justify-content:center;
     background:radial-gradient(120% 120% at 50% 0%,#f4f8fe 0%,#dbe6f6 60%,#bcd0ec 100%);padding:5vh 5vw 11vh}
   .shot{max-width:min(1150px,92vw);max-height:74vh;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);object-fit:contain;background:#fff}
@@ -83,7 +84,7 @@
   .sumtable tr:last-child td{border-bottom:none}
   .okrow{display:flex;align-items:center;gap:12px;padding:14px 24px;background:#e9f6ee;color:#1e6b3a;font-weight:700;font-size:clamp(13px,1.5vw,16px)}
   .okrow .ck{width:26px;height:26px;border-radius:50%;background:#2a7d46;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
-  .slide.cert{flex-direction:column;align-items:center;justify-content:flex-start;
+  .slide.cert{flex-direction:column;align-items:center;justify-content:center;
     background:linear-gradient(160deg,#0d1e38 0%,#16305c 55%,#1e3d70 100%);padding:2vh 5vw 12vh}
   .certcard{position:relative;width:min(780px,94vw);max-height:66vh;overflow:auto;background:#fff;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #e6ebf3}
   .certtop{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 28px 4px;gap:16px}
@@ -158,6 +159,8 @@
   .implbtn svg{width:18px;height:18px}
   @keyframes kb{from{transform:scale(1)}to{transform:scale(1.055)}}
   .slide.on .shot{animation:rise .55s cubic-bezier(.2,.7,.2,1) both, kb 16s linear .4s forwards}
+  .herochip{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(211,34,42,.18);border:1px solid rgba(211,34,42,.5);color:#fff;border-radius:999px;padding:10px 20px;font-weight:800;font-size:clamp(14px,1.6vw,18px);backdrop-filter:blur(4px)}
+  .herochip span{font-weight:600;font-size:.72em;color:#f4c3c6;letter-spacing:.06em}
 </style>
 </head>
 <body>
@@ -171,9 +174,10 @@
   <!-- 0 · cover -->
   <section class="slide hero on" data-audio="assets/audio/en_s0.mp3">
     <div class="box">
-      <div class="kicker anim">Cuba · Chamber of Commerce of the Republic of Cuba</div>
-      <h1 class="anim" style="animation-delay:.12s">Certificate<br>of Origin</h1>
-      <p class="anim" style="animation-delay:.24s">To export Cuban goods with the advantages they deserve. Yesterday, a paper procedure; today, online. Here is how.</p>
+      <div class="kicker anim">Cuba · Certificate of Origin · online</div>
+      <h1 class="anim" style="animation-delay:.12s">Exporting while<br>paying less duty</h1>
+      <p class="anim" style="animation-delay:.24s">With this certificate, my Cuban goods enter other markets with the preferences they are entitled to. I handle it online. Here is how.</p>
+      <div class="herochip anim" style="animation-delay:.36s">Mexico · pays ¼ of the duty <span>ALADI · ECA No. 51</span></div>
     </div>
   </section>
 
@@ -271,6 +275,7 @@
         </div>
         <div class="hint anim">The system knows the agreements for me. Based on the country and the product, it picks the right certificate type:
           <strong>ALADI</strong> (Latin America), <strong>GSP</strong> (Generalized System of Preferences) or <strong>Normal</strong>.</div>
+        <div class="okrow anim" style="animation-delay:.3s;border-radius:10px;margin-top:12px"><span class="ck">%</span><span><strong>Benefit with this certificate:</strong> 75% tariff preference — your rum pays only <strong>a quarter of Mexico’s general import duty</strong> (ECA No. 51, tariff item 2208.40.02, within the annual quota).</span></div>
       </div>
     </div>
   </section>
@@ -310,6 +315,7 @@
         <tr><td class="k">Importer (Mexico)</td><td class="v">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.</td></tr>
         <tr><td class="k">Product · subheading</td><td class="v">Cuban aged rum · 2208.40</td></tr>
         <tr><td class="k">Agreement · type</td><td class="v">ECA No. 51 Cuba–Mexico · ALADI certificate</td></tr>
+        <tr><td class="k">Tariff benefit</td><td class="v">75% preference — pays a quarter of Mexico’s general duty</td></tr>
         <tr><td class="k">Shipment</td><td class="v">MV Habana · Havana → Veracruz</td></tr>
         <tr><td class="k">Net weight · FOB value</td><td class="v">11,800 kg · 84,600.00 USD</td></tr>
       </table>
@@ -386,7 +392,7 @@
     <h2 class="anim" style="animation-delay:.1s">Cuba's Certificate of Origin</h2>
     <p class="lead anim" style="animation-delay:.2s">Issued by the Chamber of Commerce of the Republic of Cuba, on the Single Window for Foreign Trade of MINCEX.</p>
     <div class="chips anim" style="animation-delay:.3s">
-      <span class="chip">Vice Ministry of Foreign Trade · MINCEX</span>
+      <span class="chip">Ministry of Foreign Trade (MINCEX)</span>
       <span class="chip">Chamber of Commerce of the Republic of Cuba</span>
       <span class="chip">UN Trade and Development · UNCTAD</span>
     </div>
@@ -407,7 +413,7 @@
 
 <script>
 const NARR = [
-  "I run a Cuban export company. For our products to enter other markets with the advantages they deserve, I need one key document: the certificate of origin. It used to be an in-person procedure, with paper forms. Today I do it online. Let me show you how.",
+  "I run a Cuban export company. Every shipment we send gains or loses on a single document: the certificate of origin. With it, my goods pay less duty —into Mexico, as little as a quarter—; without it, they enter as if they came from anywhere. It used to be a paper procedure; today I handle it online, and I'll show you how.",
   "The certificate of origin is the official document that proves a good is of Cuban origin. It is issued by the Chamber of Commerce of the Republic of Cuba, under the Rules of Origin Regulation, Joint Resolution number 6 of 2018, aligned with the World Trade Organization Agreement.",
   "What is it for? With this certificate my goods gain access to tariff preferences: they pay lower duties, or none, in the countries Cuba has trade agreements with. Without it, my product enters as if it came from anywhere, and loses that advantage.",
   "It all starts in one place: the Single Window for Foreign Trade. An official portal where, among the permits, I find the certificate of origin.",
@@ -415,13 +421,13 @@ const NARR = [
   "The form guides me step by step. First it confirms my export company: its name, country of origin, address and contact. Data the system already knows and pre-fills.",
   "Then I choose the country I will ship to. With one click on «Find importer», the system brings up the importers registered for that country. I pick mine, and its details fill in on their own.",
   "I declare the product to export. I choose the tariff subheading from an official catalog —the code that identifies the goods worldwide— and add the description and the origin criterion.",
-  "Here is the heart of the procedure. The system looks up the trade agreements that apply to that country and that product, and determines just the right type of certificate: ALADI for Latin America, the Generalized System of Preferences for other destinations, or a normal certificate. I don't have to know the agreements: the system knows them for me.",
+  "Here is the heart of the procedure. The system looks up the agreements that apply to that country and that product, and determines just the right certificate type. For my rum to Mexico, ALADI's Economic Complementation Agreement fifty-one applies: a seventy-five percent tariff preference. With the certificate of origin, my rum pays only a quarter of Mexico's general import duty. That is the benefit, and the system knows it for me.",
   "I complete the shipment details: the vessel, the ports of loading and destination, and I attach the commercial invoice with the weights and value. All the evidence, in a single submission.",
   "I review the consolidated application before sending. Company, importer, product, agreement and shipment: everything on one screen, verified.",
   "I submit, and the Chamber issues my digital certificate of origin. It comes bilingual, in Spanish and English, with its unique number and a code to verify its authenticity online, paperless. This is what travels with my goods before the foreign customs.",
   "Every certificate feeds an official export database. The data is reported once and travels verified between institutions and borders, following international standards for trade data exchange. Less paperwork, more trust.",
   "In short, the certificate of origin gives me four things: access to tariff preferences, proof of origin before any customs, an online procedure in hours instead of days, and full traceability. For my company, that means competitiveness.",
-  "This is Cuba's certificate of origin: issued by the Chamber of Commerce, easy and online. An initiative of the Vice Ministry of Foreign Trade, with the Chamber of Commerce of the Republic of Cuba and the support of the United Nations Trade and Development, UNCTAD."
+  "This is Cuba's certificate of origin: issued by the Chamber of Commerce, easy and online. An initiative of the Ministry of Foreign Trade and Foreign Investment, with the Chamber of Commerce of the Republic of Cuba and the support of the United Nations Trade and Development, UNCTAD."
 ];
 
 const slides=[...document.querySelectorAll('.slide')];

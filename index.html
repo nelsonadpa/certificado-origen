@@ -37,16 +37,17 @@
   .slide.concept h2{font-size:clamp(26px,3.6vw,44px);font-weight:800;line-height:1.12;margin:6px 0 12px;max-width:20ch}
   .slide.concept p.lead{font-size:clamp(16px,2vw,23px);color:#dce6f6;max-width:58ch;line-height:1.5}
   .bignum{font-size:clamp(70px,13vw,180px);font-weight:900;color:#fff;line-height:1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
-  .bignum small{font-size:.28em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
+  .bignum small{font-size:.24em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
 
   /* hero photo slide */
   .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;
-    background:url('assets/img/portal-home.png') center/cover no-repeat}
-  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,18,38,.94) 0%,rgba(8,18,38,.86) 42%,rgba(8,18,38,.70) 100%)}
-  .slide.hero .box{position:relative;padding:0 7vw 12vh;max-width:940px}
-  .slide.hero .kicker{font-size:clamp(13px,1.5vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
-  .slide.hero h1{font-size:clamp(38px,6vw,82px);font-weight:900;line-height:1.04;margin:14px 0 12px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
-  .slide.hero p{font-size:clamp(15px,1.9vw,22px);color:#eaf0fa;max-width:54ch;line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+    background:#0c1c38 url('assets/img/hero-port.png') right center/cover no-repeat}
+  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,20,42,.86) 0%,rgba(9,20,42,.40) 46%,rgba(9,20,42,0) 72%),linear-gradient(0deg,rgba(6,14,30,.66) 0%,rgba(6,14,30,0) 34%)}
+  .slide.hero .box{position:relative;padding:0 7vw max(210px,18vh);max-width:900px}
+  .slide.hero .box::before{content:"";display:block;width:56px;height:4px;border-radius:3px;background:var(--red);margin-bottom:22px;box-shadow:0 0 22px rgba(211,34,42,.55)}
+  .slide.hero .kicker{font-size:clamp(12px,1.3vw,15px);letter-spacing:.22em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
+  .slide.hero h1{font-size:clamp(40px,5.4vw,72px);font-weight:900;line-height:1.05;margin:12px 0 14px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+  .slide.hero p{font-size:clamp(15px,1.7vw,21px);color:#eaf0fa;max-width:46ch;line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.55)}
 
   /* screenshot slides */
   .slide.screen{flex-direction:column;align-items:center;justify-content:center;
@@ -106,7 +107,7 @@
   .okrow .ck{width:26px;height:26px;border-radius:50%;background:#2a7d46;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
 
   /* certificate (calqued from the real "Certificado Normal" print document) */
-  .slide.cert{flex-direction:column;align-items:center;justify-content:flex-start;
+  .slide.cert{flex-direction:column;align-items:center;justify-content:center;
     background:linear-gradient(160deg,#0d1e38 0%,#16305c 55%,#1e3d70 100%);padding:2vh 5vw 12vh}
   .certcard{position:relative;width:min(780px,94vw);max-height:66vh;overflow:auto;background:#fff;border-radius:12px;
     box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #e6ebf3}
@@ -205,6 +206,8 @@
   .implbtn svg{width:18px;height:18px}
   @keyframes kb{from{transform:scale(1)}to{transform:scale(1.055)}}
   .slide.on .shot{animation:rise .55s cubic-bezier(.2,.7,.2,1) both, kb 16s linear .4s forwards}
+  .herochip{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(211,34,42,.18);border:1px solid rgba(211,34,42,.5);color:#fff;border-radius:999px;padding:10px 20px;font-weight:800;font-size:clamp(14px,1.6vw,18px);backdrop-filter:blur(4px)}
+  .herochip span{font-weight:600;font-size:.72em;color:#f4c3c6;letter-spacing:.06em}
 </style>
 </head>
 <body>
@@ -218,9 +221,10 @@
   <!-- 0 · portada -->
   <section class="slide hero on" data-audio="assets/audio/s0.mp3">
     <div class="box">
-      <div class="kicker anim">Cuba · Cámara de Comercio de la República de Cuba</div>
-      <h1 class="anim" style="animation-delay:.12s">Certificado<br>de Origen</h1>
-      <p class="anim" style="animation-delay:.24s">Para exportar con las ventajas que le corresponden a la mercancía cubana. Antes, un trámite en papel; hoy, en línea. Así se hace.</p>
+      <div class="kicker anim">Cuba · Certificado de Origen · en línea</div>
+      <h1 class="anim" style="animation-delay:.12s">Exportar pagando<br>menos aranceles</h1>
+      <p class="anim" style="animation-delay:.24s">Con el certificado, mi mercancía cubana entra a otros mercados con las preferencias que le corresponden. Lo tramito en línea. Le muestro cómo.</p>
+      <div class="herochip anim" style="animation-delay:.36s">México · paga ¼ del arancel <span>ALADI · ACE No. 51</span></div>
     </div>
   </section>
 
@@ -332,6 +336,7 @@
         </div>
         <div class="hint anim">El sistema conoce los acuerdos por mí. Según el país y el producto, elige el tipo correcto de certificado:
           <strong>ALADI</strong> (América Latina), <strong>SGP</strong> (Sistema General de Preferencias) o <strong>Normal</strong>.</div>
+        <div class="okrow anim" style="animation-delay:.3s;border-radius:10px;margin-top:12px"><span class="ck">%</span><span><strong>Beneficio con este certificado:</strong> 75% de preferencia arancelaria — su ron paga solo la <strong>cuarta parte del arancel general</strong> en México (ACE No. 51, fracción 2208.40.02, dentro del cupo anual).</span></div>
       </div>
     </div>
   </section>
@@ -371,6 +376,7 @@
         <tr><td class="k">Importador (México)</td><td class="v">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.</td></tr>
         <tr><td class="k">Producto · subpartida</td><td class="v">Ron añejo cubano · 2208.40</td></tr>
         <tr><td class="k">Acuerdo · tipo</td><td class="v">ACE No. 51 Cuba–México · Certificado ALADI</td></tr>
+        <tr><td class="k">Beneficio arancelario</td><td class="v">75% de preferencia — paga ¼ del arancel general en México</td></tr>
         <tr><td class="k">Operación</td><td class="v">MV Habana · La Habana → Veracruz</td></tr>
         <tr><td class="k">Peso neto · Valor FOB</td><td class="v">11 800 kg · 84 600.00 USD</td></tr>
       </table>
@@ -461,7 +467,7 @@
     <h2 class="anim" style="animation-delay:.1s">Certificado de Origen de Cuba</h2>
     <p class="lead anim" style="animation-delay:.2s">Emitido por la Cámara de Comercio de la República de Cuba, en la Ventanilla Única de Comercio Exterior del MINCEX.</p>
     <div class="chips anim" style="animation-delay:.3s">
-      <span class="chip">Viceministerio de Comercio Exterior · MINCEX</span>
+      <span class="chip">Ministerio de Comercio Exterior (MINCEX)</span>
       <span class="chip">Cámara de Comercio de la República de Cuba</span>
       <span class="chip">ONU Comercio y Desarrollo · UNCTAD</span>
     </div>
@@ -487,7 +493,7 @@
 
 <script>
 const NARR = [
-  "Dirijo una empresa exportadora cubana. Para que nuestros productos entren a otros mercados con las ventajas que les corresponden, necesito un documento clave: el certificado de origen. Antes era un trámite presencial, con modelos en papel. Hoy lo resuelvo en línea. Le muestro cómo.",
+  "Dirijo una empresa exportadora cubana. Cada embarque que sale gana o pierde según un solo documento: el certificado de origen. Con él, mi mercancía paga menos aranceles —a México, hasta la cuarta parte—; sin él, entra como si viniera de cualquier parte. Antes era un trámite en papel; hoy lo resuelvo en línea, y le muestro cómo.",
   "El certificado de origen es el documento oficial que acredita que una mercancía es de origen cubano. Lo emite la Cámara de Comercio de la República de Cuba, conforme al Reglamento sobre Normas de Origen, la Resolución Conjunta número 6 de 2018, alineada con el Acuerdo de la Organización Mundial del Comercio.",
   "¿Para qué me sirve? Con este certificado mi mercancía accede a preferencias arancelarias: paga menos aranceles, o ninguno, en los países con los que Cuba tiene acuerdos comerciales. Sin él, mi producto entra como si viniera de cualquier parte, y pierde esa ventaja.",
   "Todo empieza en un solo lugar: la Ventanilla Única de Comercio Exterior. Un portal oficial donde encuentro, entre los permisos, el certificado de origen.",
@@ -495,13 +501,13 @@ const NARR = [
   "El formulario me guía paso a paso. Primero confirma mi empresa exportadora: su nombre, su país de origen, su dirección y su contacto. Datos que el sistema ya conoce y precarga.",
   "Luego elijo el país a donde enviaré la mercancía. Con un clic en «Buscar importador», el sistema trae los importadores registrados para ese país. Selecciono el mío, y sus datos se completan solos.",
   "Declaro el producto a exportar. Elijo la subpartida arancelaria de un catálogo oficial —el código que identifica la mercancía en todo el mundo— y agrego la descripción y el criterio de origen.",
-  "Aquí está el corazón del trámite. El sistema busca los acuerdos comerciales que aplican a ese país y a ese producto, y determina solo el tipo de certificado que corresponde: ALADI para América Latina, Sistema General de Preferencias para otros destinos, o certificado normal. Yo no tengo que saberme los acuerdos: el sistema los conoce por mí.",
+  "Aquí está el corazón del trámite. El sistema busca los acuerdos que aplican a ese país y a ese producto, y determina solo el tipo de certificado. Para mi ron a México aplica el Acuerdo de Complementación Económica cincuenta y uno de la ALADI: setenta y cinco por ciento de preferencia arancelaria. Con el certificado de origen, mi ron paga solo la cuarta parte del arancel general mexicano. Ese es el beneficio, y el sistema lo sabe por mí.",
   "Completo los datos de la operación: el buque, los puertos de embarque y destino, y adjunto la factura comercial con los pesos y el valor. Toda la evidencia, en un solo envío.",
   "Reviso la solicitud consolidada antes de enviar. Empresa, importador, producto, acuerdo y operación: todo en una sola pantalla, verificado.",
   "Envío, y la Cámara emite mi certificado de origen digital. Sale bilingüe, en español e inglés, con su número único y un código para verificar su autenticidad en línea, sin papel. Este es el que acompaña a mi mercancía ante la aduana extranjera.",
   "Cada certificado alimenta una base de datos oficial de exportaciones. El dato se reporta una sola vez y viaja verificado entre instituciones y fronteras, siguiendo los estándares internacionales de intercambio de datos de comercio. Menos papeles, más confianza.",
   "En resumen, el certificado de origen me da cuatro cosas: acceso a preferencias arancelarias, prueba de origen ante cualquier aduana, un trámite en línea en horas y no en días, y trazabilidad completa. Para mi empresa, eso es competitividad.",
-  "Esto es el certificado de origen de Cuba: emitido por la Cámara de Comercio, fácil y en línea. Una iniciativa del Viceministerio de Comercio Exterior, con la Cámara de Comercio de la República de Cuba y el apoyo de las Naciones Unidas para el Comercio y el Desarrollo, la UNCTAD."
+  "Esto es el certificado de origen de Cuba: emitido por la Cámara de Comercio, fácil y en línea. Una iniciativa del Ministerio de Comercio Exterior y la Inversión Extranjera, con la Cámara de Comercio de la República de Cuba y el apoyo de las Naciones Unidas para el Comercio y el Desarrollo, la UNCTAD."
 ];
 
 const slides=[...document.querySelectorAll('.slide')];
