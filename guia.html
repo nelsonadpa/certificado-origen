@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificado de Origen — Guía · Cuba</title>
+<style>
+  :root{
+    --red:#d3222a; --red-dark:#a81b22; --navy:#16305c; --navy-deep:#0d1e38;
+    --ink:#1c2430; --gris:#5b6674; --gris-2:#8a94a2;
+    --paper:#f7f9fc; --line:#e3e9f2; --soft:#eef3fb;
+    --pref:#eaf1fb; --pref-borde:#c8d9f0; --pref-tx:#1e4d8b;
+    --nopref:#fdf0e8; --nopref-borde:#f0d4c0; --nopref-tx:#8a4a1e;
+    --ok:#e9f6ee; --ok-borde:#cbe2d1; --ok-tx:#1e6b3a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  svg.ic{width:20px;height:20px;flex:none}
+
+  /* header */
+  header{background:var(--navy-deep);color:#fff;padding:14px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.04em}
+  .brand .sq{width:34px;height:34px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+  .brand small{display:block;font-weight:600;color:#aebfd8;font-size:11px;letter-spacing:.12em}
+  header nav{display:flex;gap:10px;flex-wrap:wrap}
+  header nav a{color:#e7eefb;text-decoration:none;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px}
+  header nav a:hover{background:rgba(255,255,255,.12)}
+  header nav a.cta{background:var(--red);border-color:transparent}
+
+  /* hero */
+  .hero{background:linear-gradient(160deg,#0d1e38 0%,#16305c 60%,#1e3d70 100%);color:#fff;padding:64px 0 56px}
+  .hero .kicker{color:#f4c3c6;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+  .hero h1{font-size:clamp(30px,4.6vw,52px);font-weight:900;line-height:1.08;max-width:22ch}
+  .hero p{margin-top:14px;font-size:clamp(15px,1.8vw,19px);color:#dce6f6;max-width:58ch}
+  .hero .rule{width:56px;height:4px;border-radius:3px;background:var(--red);margin-bottom:20px;box-shadow:0 0 22px rgba(211,34,42,.5)}
+
+  /* secciones numeradas */
+  section{padding:56px 0}
+  section:nth-of-type(even){background:#fff}
+  .num{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .num .n{font-size:clamp(26px,3vw,36px);font-weight:900;color:var(--red);font-variant-numeric:tabular-nums}
+  .num h2{font-size:clamp(21px,2.6vw,30px);font-weight:800;color:var(--navy)}
+  .lead{color:var(--gris);max-width:70ch;margin-bottom:26px;font-size:15.5px}
+
+  /* 01 contraste binario */
+  .versus{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .vcard{border-radius:14px;padding:24px;border:1px solid var(--line);background:#fff}
+  .vcard.bad{background:#fdf1f1;border-color:#f0cccc}
+  .vcard.good{background:var(--ok);border-color:var(--ok-borde)}
+  .vcard .tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .vcard.bad .tag{color:var(--red-dark)}
+  .vcard.good .tag{color:var(--ok-tx)}
+  .vcard h3{font-size:19px;margin-bottom:8px}
+  .vcard p{font-size:14px;color:var(--gris)}
+  .vcard .big{font-size:clamp(22px,2.6vw,30px);font-weight:900;margin:12px 0 4px}
+  .vcard.bad .big{color:var(--red-dark)}
+  .vcard.good .big{color:var(--ok-tx)}
+
+  /* 02 tipos */
+  .familia{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2);margin:22px 0 10px}
+  .tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .tcard{border-radius:14px;border:1px solid var(--line);background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .tcard .th{padding:16px 20px;display:flex;align-items:center;gap:12px;font-weight:900;font-size:17px}
+  .tcard.pref .th{background:var(--pref);color:var(--pref-tx);border-bottom:1px solid var(--pref-borde)}
+  .tcard.nopref .th{background:var(--nopref);color:var(--nopref-tx);border-bottom:1px solid var(--nopref-borde)}
+  .tcard ul{list-style:none;padding:16px 20px;flex:1}
+  .tcard li{font-size:13.6px;color:var(--gris);padding-left:18px;position:relative;margin-bottom:9px}
+  .tcard li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--navy)}
+  .tcard li b{color:var(--ink)}
+  .tcard .tf{padding:12px 20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gris-2)}
+
+  /* beneficio verificado */
+  .bench{margin-top:26px;display:flex;align-items:center;gap:16px;background:var(--ok);border:1px solid var(--ok-borde);border-radius:14px;padding:16px 22px;flex-wrap:wrap}
+  .bench .pct{font-size:clamp(28px,3.4vw,40px);font-weight:900;color:var(--ok-tx);white-space:nowrap}
+  .bench .tx{font-size:14px;color:#2c5a3c;max-width:60ch}
+  .bench .tx small{display:block;color:#6c8f78;margin-top:3px;font-size:11.5px}
+
+  /* 03 matriz decisión */
+  .matriz{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .q .qq{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+  .q .qq .ico{width:38px;height:38px;border-radius:10px;background:var(--soft);color:var(--navy);display:flex;align-items:center;justify-content:center;flex:none}
+  .q .qq h3{font-size:16px;line-height:1.3}
+  .q .ans{border-left:3px solid var(--red);background:var(--paper);border-radius:0 10px 10px 0;padding:10px 14px;font-size:13.6px;color:var(--gris)}
+  .q .ans b{color:var(--navy)}
+
+  /* 04 pasos */
+  .pasos{counter-reset:paso;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .paso{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative}
+  .paso::before{counter-increment:paso;content:counter(paso);position:absolute;top:-12px;left:16px;width:26px;height:26px;border-radius:50%;
+    background:var(--red);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(168,27,34,.3)}
+  .paso h4{font-size:14.5px;margin:4px 0 5px;color:var(--navy)}
+  .paso p{font-size:12.8px;color:var(--gris)}
+
+  /* CTA final */
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;border-radius:999px;padding:13px 26px;font-size:15px}
+  .btn.p{background:var(--red);color:#fff;box-shadow:0 8px 22px rgba(168,27,34,.3)}
+  .btn.p:hover{background:var(--red-dark)}
+  .btn.s{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+  .btn.s:hover{border-color:var(--navy)}
+
+  footer{background:var(--navy-deep);color:#aebfd8;padding:30px 0;font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer b{color:#fff}
+  footer a{color:#e7eefb}
+
+  @media (max-width:720px){ .versus{grid-template-columns:1fr} section{padding:42px 0} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="sq">CO</div>
+      <div>CERTIFICADO DE ORIGEN<small>CUBA · VENTANILLA ÚNICA DE COMERCIO EXTERIOR</small></div>
+    </div>
+    <nav>
+      <a href="index.html">Ver el demo narrado</a>
+      <a class="cta" href="https://cuba.eregistrations.dev/" target="_blank" rel="noopener">Iniciar trámite</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="rule"></div>
+    <div class="kicker">Guía para el exportador</div>
+    <h1>¿Qué certificado de origen le toca a su exportación?</h1>
+    <p>El certificado de origen acredita que su mercancía es cubana — y eso decide cuánto arancel paga al entrar a otro país. Esta guía le dice cuál necesita, qué gana con él y cómo tramitarlo en línea.</p>
+  </div>
+</div>
+
+<!-- 01 -->
+<section>
+  <div class="wrap">
+    <div class="num"><span class="n">01</span><h2>La gran pregunta: ¿con o sin certificado?</h2></div>
+    <p class="lead">Su mercancía puede cruzar la frontera de dos maneras. La diferencia es plata.</p>
+    <div class="versus">
+      <div class="vcard bad">
+        <span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Sin certificado</span>
+        <h3>Su producto entra como si viniera de cualquier parte</h3>
+        <div class="big">Arancel completo</div>
+        <p>La aduana del país destino le aplica la tarifa general. Las preferencias de los acuerdos comerciales de Cuba no se activan sin la prueba de origen.</p>
+      </div>
+      <div class="vcard good">
+        <span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Con certificado</span>
+        <h3>Su producto entra con las preferencias que le corresponden</h3>
+        <div class="big">Menos arancel — o ninguno</div>
+        <p>El certificado prueba el origen cubano ante la aduana extranjera y activa las preferencias arancelarias de los acuerdos que Cuba tiene firmados.</p>
+      </div>
+    </div>
+    <div class="bench">
+      <div class="pct">¼</div>
+      <div class="tx"><b>Ejemplo real y verificado:</b> el ron cubano embotellado (subpartida 2208.40) entra a México pagando solo la cuarta parte del arancel general — preferencia del 75% bajo el acuerdo ALADI ACE No. 51, dentro del cupo anual.
+        <small>Fuente: tabla oficial de preferencias arancelarias aplicables a Cuba (ACE 51), Secretaría de Economía de México / DOF.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="wrap">
+    <div class="num"><span class="n">02</span><h2>Los tipos de certificado</h2></div>
+    <p class="lead">No hay un certificado único: el modelo depende del acuerdo comercial entre Cuba y el país destino. Estas son las familias.</p>
+
+    <div class="familia">Preferenciales — activan rebajas de arancel</div>
+    <div class="tipos">
+      <div class="tcard pref">
+        <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>ALADI</div>
+        <ul>
+          <li><b>Para exportar a América Latina</b> (México, Colombia, y demás países de la Asociación Latinoamericana de Integración).</li>
+          <li>Usa la nomenclatura <b>NALADISA</b> y cita el acuerdo exacto (ej. ACE No. 51 Cuba–México).</li>
+          <li>Incluye la declaración de origen del exportador y la certificación de la entidad.</li>
+        </ul>
+        <div class="tf">Modelo oficial ALADI · el más usado por los exportadores cubanos en la región.</div>
+      </div>
+      <div class="tcard pref">
+        <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>SGP</div>
+        <ul>
+          <li><b>Sistema General de Preferencias</b>: países que otorgan rebajas unilaterales a Cuba como país en desarrollo.</li>
+          <li>El modelo depende del esquema del país otorgante.</li>
+          <li>Ojo con la UE: desde 2020 usa el sistema <b>REX</b> (autocertificación del exportador registrado) en lugar del Form A clásico.</li>
+        </ul>
+        <div class="tf">Verifique el esquema vigente del país destino antes de embarcar.</div>
+      </div>
+    </div>
+
+    <div class="familia">No preferencial — acredita origen, sin rebaja</div>
+    <div class="tipos">
+      <div class="tcard nopref">
+        <div class="th"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Normal (no preferencial)</div>
+        <ul>
+          <li><b>Para destinos sin acuerdo preferencial</b> — por ejemplo Rusia y la Unión Económica Euroasiática, o cualquier país sin convenio.</li>
+          <li>Certifica el origen cubano ante la aduana, bancos y contratos, aunque no rebaje el arancel.</li>
+          <li>Formato bilingüe español/inglés emitido por la Cámara de Comercio.</li>
+        </ul>
+        <div class="tf">También existen modelos específicos por convenio (ej. El Salvador).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="wrap">
+    <div class="num"><span class="n">03</span><h2>Para orientarse: tres preguntas</h2></div>
+    <p class="lead">En el trámite en línea no hace falta saberse los acuerdos: <b>el sistema los busca por usted</b> según el país y el producto. Pero si quiere anticiparlo:</p>
+    <div class="matriz">
+      <div class="q">
+        <div class="qq">
+          <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.9.7 3.4 1.8 4.9L12 22l6.2-7.1C19.3 13.4 20 11.9 20 10a8 8 0 0 0-8-8z"/></svg></div>
+          <h3>¿Exporta a América Latina?</h3>
+        </div>
+        <div class="ans">Le toca el <b>certificado ALADI</b>. El sistema identifica el acuerdo exacto con ese país (ej. ACE No. 51 con México) y arma el modelo NALADISA.</div>
+      </div>
+      <div class="q">
+        <div class="qq">
+          <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/></svg></div>
+          <h3>¿El país destino otorga SGP a Cuba?</h3>
+        </div>
+        <div class="ans">Le toca el <b>certificado SGP</b> del esquema de ese país. El sistema lo detecta por la tabla de acuerdos comerciales.</div>
+      </div>
+      <div class="q">
+        <div class="qq">
+          <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg></div>
+          <h3>¿Otro destino, sin acuerdo?</h3>
+        </div>
+        <div class="ans">Le toca el <b>certificado Normal</b> (no preferencial): acredita el origen cubano aunque no haya rebaja arancelaria.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="wrap">
+    <div class="num"><span class="n">04</span><h2>El trámite, 100% en línea</h2></div>
+    <p class="lead">Lo emite la Cámara de Comercio de la República de Cuba en la Ventanilla Única de Comercio Exterior. Siete pasos, sin papel:</p>
+    <div class="pasos">
+      <div class="paso"><h4>Identidad</h4><p>Ingrese con su cuenta única; el sistema verifica su empresa contra los registros oficiales.</p></div>
+      <div class="paso"><h4>Su empresa</h4><p>Los datos del exportador vienen precargados.</p></div>
+      <div class="paso"><h4>Destino e importador</h4><p>Elija el país; el sistema trae los importadores registrados.</p></div>
+      <div class="paso"><h4>Producto</h4><p>Seleccione la subpartida arancelaria del catálogo oficial y el criterio de origen.</p></div>
+      <div class="paso"><h4>Acuerdo</h4><p>El sistema busca el acuerdo aplicable y decide el tipo de certificado por usted.</p></div>
+      <div class="paso"><h4>Operación y factura</h4><p>Buque, puertos, pesos, valor y la factura comercial adjunta.</p></div>
+      <div class="paso"><h4>Certificado digital</h4><p>Revise, envíe, y reciba el certificado bilingüe con su número único verificable.</p></div>
+    </div>
+    <div class="ctas">
+      <a class="btn p" href="https://cuba.eregistrations.dev/" target="_blank" rel="noopener">Iniciar mi solicitud
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <a class="btn s" href="index.html">Ver el demo narrado (3 min)</a>
+      <a class="btn s" href="como-implementar.html">¿Cómo implementarlo en su país?</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>Cámara de Comercio de la República de Cuba</b> · Ministerio de Comercio Exterior (MINCEX)<br>
+      Con el apoyo de <b>ONU Comercio y Desarrollo (UNCTAD)</b> · Gobierno Digital</div>
+    <div><a href="en.html">English demo</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

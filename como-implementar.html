@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNCTAD — Certificado de Origen digital · Nota conceptual</title>
+<style>
+  :root{
+    --azul:#1e4d8b; --azul-2:#2563a6; --azul-suave:#eef3fa; --azul-linea:#dbe6f4;
+    --rojo:#b0413e; --verde:#e8f2ea; --verde-borde:#cbe2d1; --verde-texto:#2f6b45;
+    --tinta:#1c2430; --gris:#5b6674; --gris-2:#8a94a2;
+    --chip:#eef1f5; --chip-borde:#e0e5ec; --fondo:#eceef1; --tarjeta:#ffffff;
+    --pilar-1:#eaf1fb; --pilar-2:#fdf3e8; --pilar-3:#eaf5f1; --pilar-4:#f2edfa;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--fondo);color:var(--tinta);line-height:1.5;-webkit-font-smoothing:antialiased;padding:28px 16px}
+  .hoja{max-width:820px;margin:0 auto;background:var(--tarjeta);border-radius:14px;
+    box-shadow:0 10px 34px rgba(28,36,48,.13);border-top:5px solid var(--azul);overflow:hidden;position:relative}
+  .interior{padding:34px 40px 26px}
+  .sello{position:absolute;top:20px;right:26px;border:2px solid var(--rojo);color:var(--rojo);
+    font-weight:800;font-size:12px;letter-spacing:3px;padding:5px 12px;border-radius:6px;
+    transform:rotate(6deg);opacity:.82;text-transform:uppercase}
+  .kicker{color:var(--azul);font-weight:700;font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;margin:0 0 12px;max-width:70%}
+  h1{font-size:30px;line-height:1.15;margin:0 0 8px;font-weight:800;letter-spacing:-.3px;max-width:92%}
+  .subtitulo{font-style:italic;color:var(--gris);font-size:15.5px;margin:0 0 22px}
+  .idea-franja{background:var(--azul-suave);border:1px solid var(--azul-linea);border-left:4px solid var(--azul);
+    border-radius:10px;padding:16px 20px;font-size:15.5px;margin-bottom:26px}
+  .idea-franja b{color:var(--azul)}
+  .rotulo{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;color:var(--azul);margin:0 0 12px}
+  .rotulo.rojo{color:var(--rojo)}
+  .pilares{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+  .pilar{border-radius:10px;padding:14px 13px;border:1px solid var(--chip-borde)}
+  .pilar:nth-child(1){background:var(--pilar-1)}
+  .pilar:nth-child(2){background:var(--pilar-2)}
+  .pilar:nth-child(3){background:var(--pilar-3)}
+  .pilar:nth-child(4){background:var(--pilar-4)}
+  .pilar .icono{display:block;margin-bottom:8px;color:#39424e}
+  .pilar .icono svg{width:22px;height:22px;display:block}
+  .pilar .verbo{font-weight:800;font-size:15px;display:block;margin-bottom:3px}
+  .pilar .desc{font-size:12.3px;color:var(--gris);line-height:1.35}
+  .dos-col{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-bottom:28px}
+  .col p{margin:0 0 10px;font-size:14px}
+  .col p:last-child{margin-bottom:0}
+  .col .nota{font-size:12.5px;color:var(--gris-2);font-style:italic}
+  .lista{list-style:none;margin:0;padding:0}
+  .lista li{position:relative;padding-left:20px;margin-bottom:9px;font-size:13.6px}
+  .lista li::before{content:"";position:absolute;left:2px;top:7px;width:7px;height:7px;border-radius:2px;background:var(--azul-2)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 0}
+  .chip{background:var(--chip);border:1px solid var(--chip-borde);color:var(--gris);border-radius:20px;
+    padding:5px 12px;font-size:12px;font-weight:600;white-space:nowrap}
+  .chip b{color:var(--azul);font-weight:800}
+  .verde-caja{background:var(--verde);border:1px solid var(--verde-borde);border-radius:10px;
+    padding:13px 18px;font-size:13.4px;color:var(--verde-texto);margin-bottom:26px}
+  .verde-caja b{color:#245538}
+  .impacto{margin-bottom:26px}
+  .impacto .chips .chip{background:#fff;border-color:var(--azul-linea)}
+  .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:var(--azul-suave);
+    border:1px solid var(--azul-linea);border-radius:10px;padding:16px 20px;margin-bottom:22px}
+  .tres .b .r{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--azul);font-weight:700;margin-bottom:4px}
+  .tres .b .v{font-size:15px;font-weight:700;line-height:1.25}
+  .tres .b .v small{display:block;font-size:11.5px;font-weight:500;color:var(--gris);margin-top:2px}
+  .ruta{margin-bottom:24px}
+  .fases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .fase{border:1px solid var(--chip-borde);border-radius:10px;padding:13px 14px;border-top:3px solid var(--azul-2)}
+  .fase .n{font-size:11px;font-weight:800;color:var(--azul);letter-spacing:.5px;margin-bottom:4px}
+  .fase .m{font-size:11px;color:var(--gris-2);margin-bottom:6px}
+  .fase .t{font-size:12.6px;color:var(--gris);line-height:1.4}
+  .pie{border-top:1px solid var(--azul-linea);padding-top:14px;display:flex;justify-content:space-between;
+    align-items:flex-end;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--gris)}
+  .pie .org{font-weight:700;color:var(--tinta)}
+  .pie .org small{display:block;font-weight:500;color:var(--gris-2);font-size:11px;margin-top:2px}
+  .pie .cto{text-align:right}
+  .pie .cto b{color:var(--azul)}
+  @media (max-width:680px){
+    body{padding:14px 10px}
+    .interior{padding:26px 20px 20px}
+    h1{font-size:24px;max-width:100%}
+    .pilares{grid-template-columns:repeat(2,1fr)}
+    .dos-col{grid-template-columns:1fr;gap:20px}
+    .tres,.fases{grid-template-columns:1fr}
+    .sello{top:14px;right:14px}
+    .pie{flex-direction:column;align-items:flex-start}
+    .pie .cto{text-align:left}
+  }
+  @page{size:A4;margin:12mm}
+  @media print{
+    body{background:#fff;padding:0}
+    .hoja{box-shadow:none;border-radius:0;max-width:100%}
+    .interior{padding:0}
+    .sello{opacity:1}
+  }
+</style>
+</head>
+<body>
+  <div class="hoja">
+    <div class="interior">
+      <div class="sello">Draft · Julio 2026</div>
+
+      <p class="kicker">UN Trade &amp; Development · Gobierno Digital · Facilitación del Comercio</p>
+      <h1>Certificado de Origen digital: el caso Cuba, listo para su país</h1>
+      <p class="subtitulo">Propuesta de cooperación técnica UNCTAD — emisión 100% en línea del certificado de origen · 12 meses.</p>
+
+      <div class="idea-franja">
+        Llevar la emisión del certificado de origen <b>completamente en línea</b>: solicitud guiada,
+        <b>el sistema elige solo el modelo correcto</b> según el acuerdo comercial (ALADI, SGP, no preferencial…),
+        <b>certificado digital verificable</b> y un registro estructurado de cada emisión —
+        replicando la implementación <b>ya en producción en Cuba</b>.
+      </div>
+
+      <!-- PILARES -->
+      <div class="pilares">
+        <div class="pilar">
+          <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+          <span class="verbo">Digitalizar</span>
+          <span class="desc">Del papel presencial a un trámite en línea de punta a punta.</span>
+        </div>
+        <div class="pilar">
+          <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></svg></span>
+          <span class="verbo">Enrutar</span>
+          <span class="desc">El sistema conoce los acuerdos: país + producto → el modelo exacto de certificado.</span>
+        </div>
+        <div class="pilar">
+          <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <span class="verbo">Verificar</span>
+          <span class="desc">Certificado digital con código verificable en línea, sin papel.</span>
+        </div>
+        <div class="pilar">
+          <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+          <span class="verbo">Capacitar</span>
+          <span class="desc">La entidad emisora queda operando y escalando sola.</span>
+        </div>
+      </div>
+
+      <!-- DOS COLUMNAS -->
+      <div class="dos-col">
+        <div class="col">
+          <p class="rotulo">La idea</p>
+          <p>En Cuba, la Cámara de Comercio emite el certificado de origen en línea, en la Ventanilla
+          Única de Comercio Exterior del MINCEX, sobre la plataforma <b>eRegistrations</b> de UNCTAD
+          (sin programar). El exportador declara producto y destino; el sistema busca el acuerdo
+          comercial aplicable y emite el modelo correcto: ALADI, SGP o no preferencial.</p>
+          <p>El beneficio es tangible: con el certificado, el ron cubano entra a México pagando
+          <b>solo la cuarta parte del arancel general</b> (preferencia del 75%, ACE No. 51 — verificado
+          en el arancel oficial mexicano). Sin certificado, esa ventaja se pierde.</p>
+          <p class="nota">eRegistrations = plataforma no-code: la entidad configura sus servicios sin escribir código.</p>
+        </div>
+        <div class="col">
+          <p class="rotulo rojo">Lo que se entrega</p>
+          <ul class="lista">
+            <li>Formulario guiado en línea: exportador, destino, importador, producto y factura.</li>
+            <li>Tabla de acuerdos comerciales país→modelo + catálogo arancelario nacional.</li>
+            <li>Plantillas digitales de cada modelo de certificado (bilingües).</li>
+            <li>Registro estructurado de emisiones, consultable por la entidad y las aduanas.</li>
+            <li>Verificación en línea del certificado (código único).</li>
+            <li>Alineado a estándares: OMC (Normas de Origen), OMA/RKC Anexo K, UN/CEFACT (eCO), ISO/IEC 18004.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EVIDENCIA -->
+      <div class="impacto">
+        <p class="rotulo">Evidencia</p>
+        <div class="chips">
+          <span class="chip">Cuba · <b>en producción</b> (Cámara de Comercio + VUCE/MINCEX)</span>
+          <span class="chip"><b>4 modelos</b> de certificado enrutados automáticamente</span>
+          <span class="chip">Metodología UNCTAD probada en <b>+40 países</b></span>
+          <span class="chip">Demo narrado bilingüe <b>disponible</b></span>
+        </div>
+      </div>
+
+      <!-- NOTA VERDE -->
+      <div class="verde-caja">
+        <b>Cómo trabajamos:</b> la cooperación deja <b>capacidad instalada</b> en la entidad emisora
+        —plantillas, tabla de acuerdos, formularios y capacitación en el puesto sobre el servicio real—.
+        No genera dependencia de un proveedor: la plataforma es no-code y la opera el equipo local.
+      </div>
+
+      <!-- HOJA DE RUTA -->
+      <div class="ruta">
+        <p class="rotulo">La hoja de ruta · 12 meses</p>
+        <div class="fases">
+          <div class="fase">
+            <div class="n">FASE 1</div>
+            <div class="m">Meses 1–3</div>
+            <div class="t">Instalar o adaptar la plataforma, mapear los acuerdos comerciales y modelos de certificado del país, y diseñar el servicio con la entidad emisora.</div>
+          </div>
+          <div class="fase">
+            <div class="n">FASE 2</div>
+            <div class="m">Meses 4–8</div>
+            <div class="t">Construir el servicio, integrar el catálogo arancelario y el registro de exportadores, firma digital, y <b>piloto con la entidad emisora</b>.</div>
+          </div>
+          <div class="fase">
+            <div class="n">FASE 3</div>
+            <div class="m">Meses 9–12</div>
+            <div class="t">Lanzamiento público, estabilización, y transferencia completa de la operación al equipo local.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRANJA PIE: 3 bloques -->
+      <div class="tres">
+        <div class="b">
+          <div class="r">Duración</div>
+          <div class="v">12 meses<small>en 3 fases · piloto desde el mes 4</small></div>
+        </div>
+        <div class="b">
+          <div class="r">Presupuesto indicativo</div>
+          <div class="v">EUR 400 – 650 mil<small>PSC ONU incluido · según alcance e integraciones</small></div>
+        </div>
+        <div class="b">
+          <div class="r">Qué buscamos</div>
+          <div class="v">Entidad emisora + sponsor<small>cámara de comercio o ministerio de comercio, y financiamiento a explorar</small></div>
+        </div>
+      </div>
+
+      <!-- PIE -->
+      <div class="pie">
+        <div class="org">
+          UN Trade &amp; Development (UNCTAD)
+          <small>Gobierno Digital y Facilitación de Negocios · Borrador para conversación</small>
+        </div>
+        <div class="cto">
+          <b>Nelson Pérez</b><br>
+          nelson.perez@unctad.org
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
