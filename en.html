@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate of Origin — Cuba · narrated demo</title>
+<style>
+  :root{
+    --red:#d3222a; --red-dark:#a81b22; --navy:#16305c; --navy-deep:#0d1e38;
+    --ink:#16203a; --paper:#fbfcfe; --soft:#eef3fb; --line:rgba(22,32,58,.12);
+    --gold:#e0b23a;
+    --shadow:0 18px 50px rgba(13,30,56,.20);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#08152b;color:var(--ink);overflow:hidden}
+  .stage{position:fixed;inset:0;display:flex;flex-direction:column}
+  #bar{position:absolute;top:0;left:0;height:4px;background:var(--red);width:0%;z-index:40;transition:width .45s ease}
+  .lang{position:fixed;top:14px;right:16px;z-index:70;display:flex;gap:2px;
+    background:rgba(13,30,56,.55);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:3px;backdrop-filter:blur(8px)}
+  .lang a{font-weight:800;font-size:13px;color:#e7eefb;text-decoration:none;border-radius:999px;padding:6px 14px;line-height:1}
+  .lang a:hover{background:rgba(255,255,255,.18)}
+  .lang a.act{background:var(--red);color:#fff;pointer-events:none}
+  .slide{display:none;position:absolute;inset:0;overflow:hidden}
+  .slide.on{display:flex}
+  .slide.concept{flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    background:linear-gradient(160deg,#0d1e38 0%,#16305c 55%,#1e3d70 100%);color:#fff;padding:6vh 8vw}
+  .slide.concept .kicker{font-size:clamp(14px,1.6vw,19px);letter-spacing:.2em;text-transform:uppercase;color:#f2b6b9;font-weight:700}
+  .slide.concept h1{font-size:clamp(32px,5.2vw,68px);font-weight:900;line-height:1.08;margin:18px 0 14px;max-width:24ch}
+  .slide.concept h2{font-size:clamp(26px,3.6vw,44px);font-weight:800;line-height:1.12;margin:6px 0 12px;max-width:20ch}
+  .slide.concept p.lead{font-size:clamp(16px,2vw,23px);color:#dce6f6;max-width:58ch;line-height:1.5}
+  .bignum{font-size:clamp(70px,13vw,180px);font-weight:900;color:#fff;line-height:1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+  .bignum small{font-size:.28em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
+  .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;background:url('assets/img/portal-home.png') center/cover no-repeat}
+  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,18,38,.94) 0%,rgba(8,18,38,.86) 42%,rgba(8,18,38,.70) 100%)}
+  .slide.hero .box{position:relative;padding:0 7vw 12vh;max-width:940px}
+  .slide.hero .kicker{font-size:clamp(13px,1.5vw,18px);letter-spacing:.2em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
+  .slide.hero h1{font-size:clamp(38px,6vw,82px);font-weight:900;line-height:1.04;margin:14px 0 12px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+  .slide.hero p{font-size:clamp(15px,1.9vw,22px);color:#eaf0fa;max-width:54ch;line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+  .slide.screen{flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 50% 0%,#f4f8fe 0%,#dbe6f6 60%,#bcd0ec 100%);padding:5vh 5vw 11vh}
+  .shot{max-width:min(1150px,92vw);max-height:74vh;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);object-fit:contain;background:#fff}
+  .shot.tall{object-position:top}
+  .caption{margin-top:2.6vh;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:10px 22px;font-size:clamp(14px,1.6vw,18px);font-weight:700;color:var(--navy);box-shadow:0 6px 18px rgba(13,30,56,.10)}
+  .caption .dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex:none}
+  .step{position:absolute;top:3.4vh;left:5vw;background:var(--red);color:#fff;font-weight:800;
+    border-radius:999px;padding:8px 18px;font-size:clamp(12px,1.4vw,16px);letter-spacing:.04em;box-shadow:0 6px 18px rgba(168,27,34,.35);z-index:5}
+  .slide.formstep{flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 50% 0%,#f4f8fe 0%,#dbe6f6 60%,#bcd0ec 100%);padding:5vh 5vw 11vh}
+  .formcard{width:min(940px,94vw);max-height:76vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .formcard .fh{display:flex;align-items:center;gap:12px;padding:15px 26px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fff,#f7faff)}
+  .formcard .fh .ic{width:34px;height:34px;border-radius:9px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+  .formcard .fh h3{font-size:clamp(16px,2vw,22px);color:var(--navy);font-weight:800}
+  .fbody{padding:18px 26px 22px}
+  .frow{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+  .fld{flex:1;min-width:180px;display:flex;flex-direction:column;gap:5px}
+  .fld.full{flex-basis:100%}
+  .fld label{font-size:clamp(11px,1.25vw,13px);color:#5a6b86;font-weight:600}
+  .fld .val{border:1.5px solid #dce4f0;border-radius:9px;padding:10px 13px;font-size:clamp(13px,1.5vw,16px);color:var(--ink);background:#fcfdff;font-weight:600;display:flex;align-items:center;gap:8px;min-height:42px}
+  .fld .val.sel{justify-content:space-between}
+  .fld .val.sel::after{content:"▾";color:#9fb0c9;font-weight:700}
+  .tag{display:inline-block;font-size:11px;font-weight:700;color:#2a7d46;background:#e6f4ea;border-radius:6px;padding:2px 8px;margin-left:auto}
+  .btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}
+  .fbtn{background:var(--red);color:#fff;border:none;border-radius:9px;padding:11px 20px;font-weight:800;font-size:clamp(13px,1.5vw,15px);box-shadow:0 6px 16px rgba(168,27,34,.28)}
+  .fbtn.ghost{background:#fff;color:var(--navy);border:1.5px solid #dce4f0;box-shadow:none}
+  .pill-type{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:999px;padding:8px 18px;font-weight:800;font-size:clamp(13px,1.6vw,17px)}
+  .pill-type b{color:var(--gold)}
+  .hint{font-size:clamp(11px,1.35vw,13.5px);color:#6b7c96;background:#f3f7fd;border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:9px 13px;margin-top:6px;line-height:1.4}
+  .miniempresa{display:flex;align-items:center;gap:14px;padding:12px 16px;background:#f7faff;border:1px solid var(--line);border-radius:12px;margin-bottom:16px}
+  .miniempresa .logo{width:44px;height:44px;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex:none}
+  .miniempresa .nm{font-size:clamp(15px,1.9vw,19px);font-weight:800;color:var(--ink)}
+  .miniempresa .id{font-size:clamp(12px,1.4vw,14px);color:#6b7c96}
+  .slide.grid{flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 50% 0%,#f4f8fe 0%,#dbe6f6 60%,#bcd0ec 100%);padding:5vh 5vw 11vh}
+  .gridcard{width:min(1000px,94vw);max-height:76vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .gridcard .gh{padding:16px 24px;border-bottom:1px solid var(--line);font-weight:800;color:var(--navy);font-size:clamp(15px,1.8vw,20px);display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .gridcard .gh .no{font-size:clamp(12px,1.4vw,15px);color:var(--red);font-weight:800}
+  .sumtable{width:100%;border-collapse:collapse;font-size:clamp(12px,1.4vw,15.5px)}
+  .sumtable td{padding:12px 24px;border-bottom:1px solid #eef3fb;vertical-align:top}
+  .sumtable td.k{color:#6b7c96;font-weight:600;width:34%}
+  .sumtable td.v{color:var(--ink);font-weight:700}
+  .sumtable tr:last-child td{border-bottom:none}
+  .okrow{display:flex;align-items:center;gap:12px;padding:14px 24px;background:#e9f6ee;color:#1e6b3a;font-weight:700;font-size:clamp(13px,1.5vw,16px)}
+  .okrow .ck{width:26px;height:26px;border-radius:50%;background:#2a7d46;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+  .slide.cert{flex-direction:column;align-items:center;justify-content:flex-start;
+    background:linear-gradient(160deg,#0d1e38 0%,#16305c 55%,#1e3d70 100%);padding:2vh 5vw 12vh}
+  .certcard{position:relative;width:min(780px,94vw);max-height:66vh;overflow:auto;background:#fff;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #e6ebf3}
+  .certtop{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 28px 4px;gap:16px}
+  .certtitle{flex:1;text-align:center}
+  .certtitle b{display:block;font-size:clamp(15px,2vw,21px);color:#111;letter-spacing:.02em}
+  .certtitle span{display:block;font-size:clamp(11px,1.4vw,14px);color:#444}
+  .certno{text-align:center;flex:none}
+  .certno img{width:clamp(72px,9vw,92px);display:block}
+  .certno .c{font-family:ui-monospace,monospace;font-size:10.5px;font-weight:800;color:var(--navy);margin-top:3px;letter-spacing:.03em}
+  .certno .lbl{font-size:9px;color:#8090a8;margin-top:1px}
+  .certparties{display:flex;gap:0;border-top:1px solid #d8dfe9;border-bottom:1px solid #d8dfe9;margin:8px 0 0}
+  .party{flex:1;padding:8px 28px}
+  .party+.party{border-left:1px solid #d8dfe9}
+  .party .rl{font-size:11px;color:#333}.party .rl b{color:#000}
+  .party .dat{font-size:clamp(11px,1.4vw,13px);color:#1a2437;line-height:1.35;margin-top:3px;font-weight:600}
+  .certtransport{display:flex;border-bottom:1px solid #d8dfe9}
+  .tcell{flex:1;padding:6px 28px;font-size:10.5px;color:#333}
+  .tcell+.tcell{border-left:1px solid #d8dfe9}
+  .tcell b{color:#000;display:block}.tcell .tv{color:#1a2437;font-weight:700;margin-top:2px;font-size:12.5px}
+  table.goods{width:100%;border-collapse:collapse;font-size:clamp(10px,1.2vw,12px)}
+  table.goods th{background:#f4f7fb;color:#33415c;padding:7px 8px;border:1px solid #dbe2ec;font-weight:700;text-align:center;line-height:1.2;font-size:9.5px}
+  table.goods th span{display:block;font-weight:400;color:#5a6b86}
+  table.goods td{padding:8px;border:1px solid #e6ecf4;text-align:center;color:#1a2437;font-weight:600}
+  table.goods td.desc{text-align:left}
+  .certify{padding:9px 28px;font-size:clamp(9.5px,1.2vw,11.5px);color:#23324c;line-height:1.4;text-align:justify}
+  .certify .en{color:#5a6b86;font-style:italic}
+  .certfoot2{padding:8px 28px 6px;text-align:center}
+  .certfoot2 .date{font-size:10.5px;color:#5a6b86;margin-bottom:6px}
+  .certfoot2 .cc{font-size:clamp(12px,1.6vw,15px);font-weight:900;color:#111;line-height:1.3}
+  .certfoot2 .cc span{display:block;font-size:.8em;color:#444;font-weight:700}
+  .certribbon{background:#f7fafc;border-top:1px solid #ecf1f8;padding:8px 30px;display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#8090a8;flex-wrap:wrap}
+  .slide.benefits{flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#0d1e38 0%,#16305c 60%,#1e3d70 100%);color:#fff;padding:6vh 6vw}
+  .slide.benefits h2{font-size:clamp(26px,4vw,46px);font-weight:900;margin-bottom:4vh;text-align:center}
+  .pillars{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;max-width:1050px}
+  .pillar{flex:1;min-width:190px;max-width:240px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:24px 20px;text-align:center}
+  .pillar .em{font-size:40px;line-height:1}
+  .pillar .vb{font-size:clamp(17px,2vw,22px);font-weight:800;margin:12px 0 6px;color:#fff}
+  .pillar .ds{font-size:clamp(12px,1.4vw,14.5px);color:#dce6f6;line-height:1.4}
+  .chips{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:3vh}
+  .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#eef4fd;border-radius:999px;padding:10px 20px;font-size:clamp(12px,1.5vw,16px);font-weight:600}
+  .implbtn{margin-top:3.4vh;display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;text-decoration:none;border-radius:999px;padding:13px 28px;font-size:clamp(14px,1.7vw,18px);font-weight:800;box-shadow:0 10px 26px rgba(168,27,34,.4)}
+  .implbtn:hover{background:var(--red-dark)}
+  .impl-note{margin-top:12px;font-size:12px;color:#aebfd8}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .slide.on .anim{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+  .narr{position:fixed;left:50%;transform:translateX(-50%);bottom:86px;z-index:50;display:flex;align-items:center;gap:14px;
+    max-width:min(880px,92vw);background:rgba(13,30,56,.86);backdrop-filter:blur(10px);color:#eef4fd;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:12px 20px 12px 12px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+  .narr .pa{width:52px;height:52px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(150deg,#e0555b,#a81b22);color:#fff;font-weight:900;font-size:13px;letter-spacing:.02em;border:2px solid rgba(255,255,255,.55)}
+  .narr.speaking .pa{box-shadow:0 0 0 0 rgba(211,34,42,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 14px rgba(211,34,42,0)}100%{box-shadow:0 0 0 0 rgba(211,34,42,0)}}
+  #subsT{font-size:clamp(13px,1.6vw,17px);line-height:1.45}
+  .ctrl{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;background:linear-gradient(to top,rgba(8,18,38,.94),rgba(8,18,38,0))}
+  .ctrl button{font-family:inherit;font-weight:700;font-size:14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);color:#fff;padding:10px 18px;cursor:pointer;backdrop-filter:blur(8px)}
+  .ctrl button:hover{background:rgba(255,255,255,.22)}
+  .ctrl #playBtn{background:var(--red);color:#fff;border-color:transparent;padding:10px 26px;font-size:15px}
+  .ctrl #playBtn:hover{background:var(--red-dark)}
+  #counter{color:#cdd9ee;font-size:13px;font-weight:700;min-width:52px;text-align:center;font-variant-numeric:tabular-nums}
+  .beat{position:fixed;right:18px;bottom:96px;z-index:55;display:flex;align-items:center;gap:10px;background:rgba(13,30,56,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 14px 8px 8px;backdrop-filter:blur(8px);opacity:0;transition:opacity .35s;pointer-events:none}
+  .beat.on{opacity:1}
+  .beat .pa2{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#e0555b,#a81b22);color:#fff;font-weight:900;font-size:11px;border:2px solid rgba(255,255,255,.5);transform:scale(var(--pump,1));transition:transform .09s}
+  .beat .eq{display:flex;gap:3px;align-items:center;height:26px}
+  .beat .eq span{width:4px;height:22px;border-radius:2px;background:var(--red);transform-origin:center;transform:scaleY(.18);transition:transform .09s}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div id="bar"></div>
+  <nav class="lang">
+    <a id="langLink" href="index.html" title="Ver en español">ES</a>
+    <a class="act">EN</a>
+  </nav>
+
+  <!-- 0 · cover -->
+  <section class="slide hero on" data-audio="assets/audio/en_s0.mp3">
+    <div class="box">
+      <div class="kicker anim">Cuba · Chamber of Commerce of the Republic of Cuba</div>
+      <h1 class="anim" style="animation-delay:.12s">Certificate<br>of Origin</h1>
+      <p class="anim" style="animation-delay:.24s">To export Cuban goods with the advantages they deserve. Yesterday, a paper procedure; today, online. Here is how.</p>
+    </div>
+  </section>
+
+  <!-- 1 · what is it + legal basis -->
+  <section class="slide concept" data-audio="assets/audio/en_s1.mp3">
+    <div class="kicker anim">What is it?</div>
+    <h2 class="anim" style="animation-delay:.1s">It proves a good is of <span style="color:#f4c3c6">Cuban origin</span></h2>
+    <p class="lead anim" style="animation-delay:.24s">Issued by the Chamber of Commerce of the Republic of Cuba under the Rules of Origin Regulation —Joint Resolution&nbsp;No.&nbsp;6 of 2018—, aligned with the WTO Agreement on Rules of Origin.</p>
+  </section>
+
+  <!-- 2 · what is it for (bignum) -->
+  <section class="slide concept" data-audio="assets/audio/en_s2.mp3">
+    <div class="kicker anim">What is it for?</div>
+    <div class="bignum anim" style="animation-delay:.12s" data-count="29">0<small>trade agreements with preferences</small></div>
+    <p class="lead anim" style="animation-delay:.24s">With the certificate, my goods pay <strong>lower duties —or none—</strong> in the countries Cuba has agreements with. Without it, they enter as if from anywhere, and lose that advantage.</p>
+  </section>
+
+  <!-- 3 · the portal -->
+  <section class="slide screen" data-audio="assets/audio/en_s3.mp3">
+    <div class="step anim">The official portal</div>
+    <img class="shot anim" src="assets/img/catalogo.png" alt="VUCE Cuba portal — Single Window for Foreign Trade">
+    <div class="caption anim" style="animation-delay:.15s"><span class="dot"></span>Single Window for Foreign Trade — cuba.eregistrations.dev</div>
+  </section>
+
+  <!-- 4 · sign in + KYC -->
+  <section class="slide screen" data-audio="assets/audio/en_s4.mp3">
+    <div class="step anim">Step 1 · Identity</div>
+    <img class="shot anim" src="assets/img/login.png" alt="Single account sign-in; identity verification">
+    <div class="caption anim" style="animation-delay:.15s"><span class="dot"></span>Single account · identity verified against official records</div>
+  </section>
+
+  <!-- 5 · export company -->
+  <section class="slide formstep" data-audio="assets/audio/en_s5.mp3">
+    <div class="step anim">Step 2 · My company</div>
+    <div class="formcard anim">
+      <div class="fh"><div class="ic">🏢</div><h3>Your export company details</h3></div>
+      <div class="fbody">
+        <div class="miniempresa">
+          <div class="logo">CE</div>
+          <div><div class="nm">CUBAEXPORT S.A.</div><div class="id">Tax ID 30000364727 · Havana, Cuba</div></div>
+          <span class="tag">pre-filled</span>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>Country of origin</label><div class="val sel">Cuba</div></div>
+          <div class="fld"><label>Province</label><div class="val sel">Havana</div></div>
+          <div class="fld"><label>Municipality</label><div class="val sel">Plaza de la Revolución</div></div>
+        </div>
+        <div class="frow"><div class="fld full"><label>Address</label><div class="val">Calle 23 No. 55, El Vedado</div></div></div>
+        <div class="frow"><div class="fld full"><label>Company email</label><div class="val">exportaciones@cubaexport.cu</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · destination + importer -->
+  <section class="slide formstep" data-audio="assets/audio/en_s6.mp3">
+    <div class="step anim">Step 3 · Destination & importer</div>
+    <div class="formcard anim">
+      <div class="fh"><div class="ic">🌎</div><h3>Destination country & buyer</h3></div>
+      <div class="fbody">
+        <div class="frow">
+          <div class="fld"><label>Country you will ship to</label><div class="val sel">Mexico</div></div>
+          <div class="fld" style="flex:none;align-self:flex-end"><button class="fbtn">🔎 Find importer</button></div>
+        </div>
+        <div class="hint anim">The system brings up the importers registered for that country. No need to type them by hand.</div>
+        <div class="frow" style="margin-top:14px"><div class="fld"><label>Selected importer</label><div class="val">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.</div></div></div>
+        <div class="frow"><div class="fld full"><label>Address</label><div class="val">Av. Insurgentes Sur 1234, Mexico City</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · product + subheading -->
+  <section class="slide formstep" data-audio="assets/audio/en_s7.mp3">
+    <div class="step anim">Step 4 · Product</div>
+    <div class="formcard anim">
+      <div class="fh"><div class="ic">📦</div><h3>Product to export</h3></div>
+      <div class="fbody">
+        <div class="frow"><div class="fld"><label>Tariff subheading</label><div class="val sel">2208.40 — Rum and other cane spirits</div></div></div>
+        <div class="frow"><div class="fld full"><label>Description</label><div class="val">Cuban aged rum, 40% vol., cases of 12 bottles</div></div></div>
+        <div class="frow"><div class="fld"><label>Origin criterion</label><div class="val sel">Wholly obtained</div></div></div>
+        <div class="hint anim">The subheading is the international code that identifies the goods. It is chosen from an official catalog of more than 2,200 codes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · trade agreement → certificate type (the heart) -->
+  <section class="slide formstep" data-audio="assets/audio/en_s8.mp3">
+    <div class="step anim">Step 5 · Trade agreement</div>
+    <div class="formcard anim">
+      <div class="fh"><div class="ic">🤝</div><h3>Applicable trade agreement</h3></div>
+      <div class="fbody">
+        <div class="btnrow"><button class="fbtn ghost">🔎 Find trade agreements</button></div>
+        <div class="frow">
+          <div class="fld"><label>Agreement found</label><div class="val">ECA No. 51 · Cuba – Mexico (ALADI)</div></div>
+          <div class="fld"><label>Certificate model</label><div class="val" style="justify-content:space-between">ALADI <span class="pill-type">Type&nbsp;<b>ALADI</b></span></div></div>
+        </div>
+        <div class="hint anim">The system knows the agreements for me. Based on the country and the product, it picks the right certificate type:
+          <strong>ALADI</strong> (Latin America), <strong>GSP</strong> (Generalized System of Preferences) or <strong>Normal</strong>.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · shipment + invoice -->
+  <section class="slide formstep" data-audio="assets/audio/en_s9.mp3">
+    <div class="step anim">Step 6 · Shipment & invoice</div>
+    <div class="formcard anim">
+      <div class="fh"><div class="ic">🚢</div><h3>Shipment & commercial invoice</h3></div>
+      <div class="fbody">
+        <div class="frow">
+          <div class="fld"><label>Vessel</label><div class="val">MV Habana</div></div>
+          <div class="fld"><label>Port of loading</label><div class="val sel">Havana</div></div>
+          <div class="fld"><label>Port of destination</label><div class="val sel">Veracruz</div></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>Invoice number</label><div class="val">FC-2026-0847</div></div>
+          <div class="fld"><label>Gross weight (kg)</label><div class="val">12,500</div></div>
+          <div class="fld"><label>Net weight (kg)</label><div class="val">11,800</div></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label>FOB value</label><div class="val">84,600.00</div></div>
+          <div class="fld"><label>Currency</label><div class="val sel">USD</div></div>
+          <div class="fld"><label>Attached invoice</label><div class="val">📎 invoice-FC-2026-0847.pdf</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · consolidated result -->
+  <section class="slide grid" data-audio="assets/audio/en_s10.mp3">
+    <div class="step anim">Step 7 · Review & submit</div>
+    <div class="gridcard anim">
+      <div class="gh"><span>Certificate of origin application</span><span class="no">No. CO-2026-1487</span></div>
+      <table class="sumtable">
+        <tr><td class="k">Export company</td><td class="v">CUBAEXPORT S.A. · Havana, Cuba</td></tr>
+        <tr><td class="k">Importer (Mexico)</td><td class="v">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.</td></tr>
+        <tr><td class="k">Product · subheading</td><td class="v">Cuban aged rum · 2208.40</td></tr>
+        <tr><td class="k">Agreement · type</td><td class="v">ECA No. 51 Cuba–Mexico · ALADI certificate</td></tr>
+        <tr><td class="k">Shipment</td><td class="v">MV Habana · Havana → Veracruz</td></tr>
+        <tr><td class="k">Net weight · FOB value</td><td class="v">11,800 kg · 84,600.00 USD</td></tr>
+      </table>
+      <div class="okrow anim" style="animation-delay:.25s"><span class="ck">✓</span>All verified on a single screen. Ready to submit to the Chamber of Commerce.</div>
+    </div>
+  </section>
+
+  <!-- 11 · digital certificate (calqued from the real print document) -->
+  <section class="slide cert" data-audio="assets/audio/en_s11.mp3">
+    <div class="certcard anim">
+      <div class="certtop">
+        <div class="certno" style="visibility:hidden"><img src="assets/img/qr.png" alt=""></div>
+        <div class="certtitle"><b>CERTIFICADO DE ORIGEN</b><span>CERTIFICATE OF ORIGIN</span></div>
+        <div class="certno"><img src="assets/img/qr.png" alt="Verification QR code"><div class="c">CO-2026-1487</div><div class="lbl">Verify online</div></div>
+      </div>
+      <div class="certparties">
+        <div class="party"><div class="rl">Embarcador<br><b>Consignor</b></div>
+          <div class="dat">CUBAEXPORT S.A.<br>Calle 23 No. 55, El Vedado<br>Plaza de la Revolución<br>Havana, Cuba</div></div>
+        <div class="party"><div class="rl">Destinatario<br><b>Consignee</b></div>
+          <div class="dat">COMERCIALIZADORA DEL PACÍFICO S.A. de C.V.<br>Av. Insurgentes Sur 1234<br>Mexico City, Mexico</div></div>
+      </div>
+      <div class="certtransport">
+        <div class="tcell">Buque<b>Vessel</b><div class="tv">MV Habana</div></div>
+        <div class="tcell">Puerto Embarque<b>Port of loading</b><div class="tv">Havana</div></div>
+        <div class="tcell">Puerto Destino<b>Port of Destination</b><div class="tv">Veracruz</div></div>
+      </div>
+      <table class="goods">
+        <thead><tr>
+          <th>Marcas y números<span>Marks and numbers</span></th>
+          <th>Números y clase de bultos y descripción de la mercancía<span>Number and kind of packages and description of goods</span></th>
+          <th>Peso bruto<span>Gross weight</span></th>
+          <th>Peso neto<span>Net weight</span></th>
+          <th>Valor<span>Value of goods</span></th>
+        </tr></thead>
+        <tbody><tr>
+          <td>CUBAEXPORT<br>2208.40</td>
+          <td class="desc">470 cases — Cuban aged rum, 40% vol.<br>(12 bottles per case)</td>
+          <td>12,500 kg</td><td>11,800 kg</td><td>84,600.00 USD</td>
+        </tr></tbody>
+      </table>
+      <div class="certify">
+        El que suscribe, a nombre y representación de la Cámara de Comercio de la República de Cuba, después de haber examinado los documentos que le han sido suministrados, certifica que las mercancías antes descritas son de origen cubano.
+        <br><span class="en">The undersigned, representing the Chamber of Commerce of the Republic of Cuba upon examination of the documents submitted, certifies that the goods mentioned above are of Cuban origin.</span>
+      </div>
+      <div class="certfoot2">
+        <div class="date">Expedido en / Date of Issue: <strong>9 July 2026</strong> · Havana</div>
+        <div class="cc">CÁMARA DE COMERCIO DE LA REPÚBLICA DE CUBA<span>CHAMBER OF COMMERCE OF THE REPUBLIC OF CUBA</span></div>
+      </div>
+      <div class="certribbon"><span>Digital document · QR-verifiable (ISO/IEC 18004)</span><span>cuba.eregistrations.dev</span></div>
+    </div>
+  </section>
+
+  <!-- 12 · databases + data exchange -->
+  <section class="slide concept" data-audio="assets/audio/en_s12.mp3">
+    <div class="kicker anim">What it generates</div>
+    <h2 class="anim" style="animation-delay:.1s">One data point, reported <span style="color:#f4c3c6">only once</span></h2>
+    <p class="lead anim" style="animation-delay:.24s">Every certificate feeds an official export database. The data travels verified between institutions and borders, following international standards for trade data exchange (UN/CEFACT). Less paperwork, more trust.</p>
+  </section>
+
+  <!-- 13 · benefits -->
+  <section class="slide benefits" data-audio="assets/audio/en_s13.mp3">
+    <h2 class="anim">What do I gain from the certificate of origin?</h2>
+    <div class="pillars">
+      <div class="pillar anim" style="animation-delay:.05s"><div class="em">💰</div><div class="vb">Save</div><div class="ds">Tariff preferences: lower duties, or none, in markets with an agreement.</div></div>
+      <div class="pillar anim" style="animation-delay:.15s"><div class="em">🛃</div><div class="vb">Prove origin</div><div class="ds">Proves Cuban origin before any foreign customs.</div></div>
+      <div class="pillar anim" style="animation-delay:.25s"><div class="em">⚡</div><div class="vb">Speed up</div><div class="ds">Online, in hours not days. No queues, no in-person paperwork.</div></div>
+      <div class="pillar anim" style="animation-delay:.35s"><div class="em">🔎</div><div class="vb">Trace</div><div class="ds">Every certificate is recorded and verifiable online.</div></div>
+    </div>
+  </section>
+
+  <!-- 14 · close -->
+  <section class="slide concept" data-audio="assets/audio/en_s14.mp3" id="finale">
+    <div class="kicker anim">Easy and online</div>
+    <h2 class="anim" style="animation-delay:.1s">Cuba's Certificate of Origin</h2>
+    <p class="lead anim" style="animation-delay:.2s">Issued by the Chamber of Commerce of the Republic of Cuba, on the Single Window for Foreign Trade.</p>
+    <div class="chips anim" style="animation-delay:.3s">
+      <span class="chip">Chamber of Commerce of the Republic of Cuba</span>
+      <span class="chip">UN Trade and Development · UNCTAD</span>
+    </div>
+    <a class="implbtn anim" style="animation-delay:.42s" href="como-implementar.html" target="_blank" rel="noopener">🚀 How to implement this?</a>
+    <div class="impl-note anim" style="animation-delay:.5s">Restricted access · technical cooperation plan</div>
+  </section>
+
+  <div class="narr" id="narr"><div class="pa">CCC</div><div id="subsT"></div></div>
+  <div class="beat" id="beat"><div class="pa2">CCC</div><div class="eq"><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="ctrl">
+    <button id="firstBtn" title="Start">⏮</button>
+    <button id="prevBtn" title="Previous">←</button>
+    <button id="playBtn">▶ Play</button>
+    <button id="nextBtn" title="Next">→</button>
+    <span id="counter">1 / 15</span>
+  </div>
+</div>
+
+<script>
+const NARR = [
+  "I run a Cuban export company. For our products to enter other markets with the advantages they deserve, I need one key document: the certificate of origin. It used to be an in-person procedure, with paper forms. Today I do it online. Let me show you how.",
+  "The certificate of origin is the official document that proves a good is of Cuban origin. It is issued by the Chamber of Commerce of the Republic of Cuba, under the Rules of Origin Regulation, Joint Resolution number 6 of 2018, aligned with the World Trade Organization Agreement.",
+  "What is it for? With this certificate my goods gain access to tariff preferences: they pay lower duties, or none, in the countries Cuba has trade agreements with. Without it, my product enters as if it came from anywhere, and loses that advantage.",
+  "It all starts in one place: the Single Window for Foreign Trade. An official portal where, among the permits, I find the certificate of origin.",
+  "I sign in with my single account. The platform verifies my identity and my company against official records, following international standards for digital identification. That way, every application is tied to a real, accountable person.",
+  "The form guides me step by step. First it confirms my export company: its name, country of origin, address and contact. Data the system already knows and pre-fills.",
+  "Then I choose the country I will ship to. With one click on «Find importer», the system brings up the importers registered for that country. I pick mine, and its details fill in on their own.",
+  "I declare the product to export. I choose the tariff subheading from an official catalog —the code that identifies the goods worldwide— and add the description and the origin criterion.",
+  "Here is the heart of the procedure. The system looks up the trade agreements that apply to that country and that product, and determines just the right type of certificate: ALADI for Latin America, the Generalized System of Preferences for other destinations, or a normal certificate. I don't have to know the agreements: the system knows them for me.",
+  "I complete the shipment details: the vessel, the ports of loading and destination, and I attach the commercial invoice with the weights and value. All the evidence, in a single submission.",
+  "I review the consolidated application before sending. Company, importer, product, agreement and shipment: everything on one screen, verified.",
+  "I submit, and the Chamber issues my digital certificate of origin. It comes bilingual, in Spanish and English, with its unique number and a code to verify its authenticity online, paperless. This is what travels with my goods before the foreign customs.",
+  "Every certificate feeds an official export database. The data is reported once and travels verified between institutions and borders, following international standards for trade data exchange. Less paperwork, more trust.",
+  "In short, the certificate of origin gives me four things: access to tariff preferences, proof of origin before any customs, an online procedure in hours instead of days, and full traceability. For my company, that means competitiveness.",
+  "This is Cuba's certificate of origin: issued by the Chamber of Commerce, easy and online. An initiative of the Chamber of Commerce of the Republic of Cuba, with the support of the United Nations Trade and Development, UNCTAD."
+];
+
+const slides=[...document.querySelectorAll('.slide')];
+const bar=document.getElementById('bar'), subsT=document.getElementById('subsT'),
+      counter=document.getElementById('counter'), narr=document.getElementById('narr'),
+      playBtn=document.getElementById('playBtn');
+let i=0, playing=false, audio=null, timer=null;
+const beat=document.getElementById('beat');
+const setSpeak=on=>{ narr.classList.toggle('speaking',on); beat.classList.toggle('on',on); };
+let actx=null, analyser=null, beatRAF=null;
+const eqBars=[...document.querySelectorAll('#beat .eq span')];
+function wireBeat(a){
+  try{
+    if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)(); analyser=actx.createAnalyser(); analyser.fftSize=64; analyser.connect(actx.destination); }
+    actx.resume(); actx.createMediaElementSource(a).connect(analyser);
+    if(!beatRAF){
+      const d=new Uint8Array(analyser.frequencyBinCount);
+      (function f(){ beatRAF=requestAnimationFrame(f); analyser.getByteFrequencyData(d);
+        const v=d.slice(1,11).reduce((s,x)=>s+x,0)/10/255;
+        eqBars.forEach((b,k)=>{ const e=Math.max(.15,Math.min(1, v*1.9 + Math.sin(performance.now()/85+k*1.4)*.12)); b.style.transform='scaleY('+e.toFixed(2)+')'; });
+        beat.style.setProperty('--pump',(1+v*.22).toFixed(3));
+      })();
+    }
+  }catch(e){}
+}
+function countUpIn(slide){
+  slide.querySelectorAll('[data-count]').forEach(el=>{
+    if(el.dataset.done) return; el.dataset.done=1;
+    const target=+el.dataset.count, small=el.querySelector('small');
+    const t0=performance.now(), dur=1400;
+    (function tick(t){ const k=Math.min(1,(t-t0)/dur), v=Math.round(target*(1-Math.pow(1-k,3)));
+      el.childNodes[0].nodeValue=v.toLocaleString('en-US'); if(k<1) requestAnimationFrame(tick); })(t0);
+    if(small) el.appendChild(small);
+  });
+}
+function paint(){
+  slides.forEach((s,k)=>s.classList.toggle('on',k===i));
+  counter.textContent=(i+1)+' / '+slides.length;
+  bar.style.width=((i+1)/slides.length*100)+'%';
+  subsT.textContent=NARR[i]||'';
+  countUpIn(slides[i]);
+  history.replaceState(null,'','#'+i);
+  const ll=document.getElementById('langLink'); if(ll) ll.href='index.html#'+i;
+}
+function stopSeg(){ if(audio){audio.pause();audio=null;} clearTimeout(timer); setSpeak(false); }
+function speak(){
+  stopSeg(); const src=slides[i].dataset.audio; if(!src) return;
+  audio=new Audio(src); audio.crossOrigin='anonymous'; audio.preservesPitch=true; audio.playbackRate=1.05;
+  wireBeat(audio); audio.onended=()=>{ setSpeak(false); if(playing) adv(); };
+  audio.play().then(()=>setSpeak(true)).catch(()=>{ if(playing) timer=setTimeout(()=>playing&&adv(),7000); });
+}
+function go(n){ i=Math.max(0,Math.min(slides.length-1,n)); paint(); playing?speak():stopSeg(); }
+function adv(){ if(i<slides.length-1) go(i+1); else {playing=false; setPlayBtn(); stopSeg();} }
+function setPlayBtn(){ playBtn.textContent=playing?'⏸ Pause':'▶ Play'; }
+function play(){ playing=!playing; setPlayBtn(); playing?speak():stopSeg(); }
+playBtn.onclick=play;
+document.getElementById('prevBtn').onclick=()=>go(i-1);
+document.getElementById('nextBtn').onclick=()=>go(i+1);
+document.getElementById('firstBtn').onclick=()=>go(0);
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(i+1); else if(e.key==='ArrowLeft') go(i-1); else if(e.key===' '){ e.preventDefault(); play(); } });
+i=Math.max(0,Math.min(slides.length-1,parseInt(location.hash.slice(1))||0));
+paint(); setPlayBtn();
+</script>
+</body>
+</html>
