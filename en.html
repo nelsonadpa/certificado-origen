@@ -31,9 +31,9 @@
   .slide.concept p.lead{font-size:clamp(16px,2vw,23px);color:#dce6f6;max-width:58ch;line-height:1.5}
   .bignum{font-size:clamp(70px,13vw,180px);font-weight:900;color:#fff;line-height:1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
   .bignum small{font-size:.24em;font-weight:700;color:#f2b6b9;display:block;letter-spacing:.03em}
-  .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;background:#0c1c38 url('assets/img/hero-port.png') right center/cover no-repeat}
-  .slide.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,20,42,.86) 0%,rgba(9,20,42,.40) 46%,rgba(9,20,42,0) 72%),linear-gradient(0deg,rgba(6,14,30,.66) 0%,rgba(6,14,30,0) 34%)}
-  .slide.hero .box{position:relative;padding:0 7vw max(210px,18vh);max-width:900px}
+  .slide.hero{align-items:flex-end;justify-content:flex-start;color:#fff;background:#0c1c38}
+  .slide.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,18,38,.9) 0%,rgba(8,18,38,.45) 52%,rgba(8,18,38,.24) 100%),linear-gradient(90deg,rgba(8,18,38,.55) 0%,rgba(8,18,38,.14) 52%,rgba(8,18,38,0) 78%)}
+  .slide.hero .box{position:relative;z-index:2;padding:0 7vw max(210px,18vh);max-width:900px}
   .slide.hero .box::before{content:"";display:block;width:56px;height:4px;border-radius:3px;background:var(--red);margin-bottom:22px;box-shadow:0 0 22px rgba(211,34,42,.55)}
   .slide.hero .kicker{font-size:clamp(12px,1.3vw,15px);letter-spacing:.22em;text-transform:uppercase;color:#f4c3c6;font-weight:700}
   .slide.hero h1{font-size:clamp(40px,5.4vw,72px);font-weight:900;line-height:1.05;margin:12px 0 14px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
@@ -161,6 +161,7 @@
   .slide.on .shot{animation:rise .55s cubic-bezier(.2,.7,.2,1) both, kb 16s linear .4s forwards}
   .herochip{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(211,34,42,.18);border:1px solid rgba(211,34,42,.5);color:#fff;border-radius:999px;padding:10px 20px;font-weight:800;font-size:clamp(14px,1.6vw,18px);backdrop-filter:blur(4px)}
   .herochip span{font-weight:600;font-size:.72em;color:#f4c3c6;letter-spacing:.06em}
+  .slide.hero .bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 </style>
 </head>
 <body>
@@ -173,8 +174,11 @@
 
   <!-- 0 · cover -->
   <section class="slide hero on" data-audio="assets/audio/en_s0.mp3">
+    <video class="bgvid" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
+      <source src="assets/img/port-loop.mp4" type="video/mp4">
+    </video>
     <div class="box">
-      <div class="kicker anim">Cuba · Certificate of Origin · online</div>
+      <div class="kicker anim">Certificate of Origin · Cuba · 100% online</div>
       <h1 class="anim" style="animation-delay:.12s">Exporting while<br>paying less duty</h1>
       <p class="anim" style="animation-delay:.24s">With this certificate, my Cuban goods enter other markets with the preferences they are entitled to. I handle it online. Here is how.</p>
       <div class="herochip anim" style="animation-delay:.36s">Mexico · pays ¼ of the duty <span>ALADI · ECA No. 51</span></div>
@@ -388,7 +392,7 @@
 
   <!-- 14 · close -->
   <section class="slide concept" data-audio="assets/audio/en_s14.mp3" id="finale">
-    <div class="kicker anim">Easy and online</div>
+    <div class="kicker anim">The Cuba case, ready to replicate</div>
     <h2 class="anim" style="animation-delay:.1s">Cuba's Certificate of Origin</h2>
     <p class="lead anim" style="animation-delay:.2s">Issued by the Chamber of Commerce of the Republic of Cuba, on the Single Window for Foreign Trade of MINCEX.</p>
     <div class="chips anim" style="animation-delay:.3s">
